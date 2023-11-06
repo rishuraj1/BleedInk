@@ -1,7 +1,16 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+import { Header } from "./components";
 
 const App = () => {
-  return <div className="text-7xl text-indigo-500">App</div>;
+  return (
+    <>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+    </>
+  );
 };
 
 export default App;
