@@ -5,7 +5,7 @@ import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <>
+    <nav>
       <nav className="flex justify-between items-center bg-slate-300 p-3">
         <Logo />
         {/* desktop */}
@@ -26,12 +26,7 @@ const Header = () => {
               title="Menu"
             >
               {openMenu ? (
-                <>
-                  <IoCloseSharp className="text-slate-800" />
-                  <div className="flex flex-col justify-center items-center bg-slate-300 p-3">
-                    <Navbar />
-                  </div>
-                </>
+                <IoCloseSharp className="text-slate-800" />
               ) : (
                 <IoMenuSharp className="text-slate-800" />
               )}
@@ -39,7 +34,12 @@ const Header = () => {
           }
         </div>
       </nav>
-    </>
+      {openMenu && (
+        <div className="max-md:flex hidden gap-3 justify-center items-center bg-slate-300 p-3">
+          <Navbar />
+        </div>
+      )}
+    </nav>
   );
 };
 
