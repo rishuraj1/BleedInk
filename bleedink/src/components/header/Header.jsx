@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Avatar, Darkmode, Logo, Navbar } from "./";
 import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
+
+  const user = useSelector((state) => state?.auth?.userData);
+  // console.log(user);
   return (
     <nav>
       <nav className="flex justify-between items-center bg-slate-300 p-3">

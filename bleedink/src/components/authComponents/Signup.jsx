@@ -1,24 +1,54 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Input, Logo } from "../index";
-import { useDispatch } from "react-redux";
+import { Button, Input, Login, Logo } from "../index";
+import { useDispatch, useSelector } from "react-redux";
+import { login as authLogin } from "../../store/authSlice";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
+import axios from "axios";
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, getValues } = useForm();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const signup = async () => {
-    // something
+  const signup = async (data) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post("/api/v1/auth", data);
+      // console.log(response);
+      dispatch(
+        authLogin({
+          type: "signup",
+          userData: {
+            name: response?.data?.data?.name,
+            email: response?.data?.data?.email,
+            id: response?.data?.data?._id,
+          },
+        }),
+      );
+      toast.success("Account created successfully!");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,12 +120,6 @@ const Signup = () => {
               placeholder="Enter password"
               {...register("password", {
                 required: true,
-                validate: (value) => {
-                  if (!value.includes("@")) {
-                    return "Email must include @";
-                  }
-                  return true;
-                },
               })}
               icon={<RiLockPasswordFill className="text-gray-500 text-xl" />}
               className="w-full"
