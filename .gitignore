@@ -5,7 +5,7 @@
 /build
 
 # dotenv environment variables file
-/.env
+.env
 
 # IDE and editor files
 .vscode/
