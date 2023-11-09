@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     type: String, // we will hash it before saving it to the database
     required: true,
   },
+  profilePicture: {
+    type: String,
+    required: false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

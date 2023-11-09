@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Input, Logo } from "../index";
 import { useDispatch } from "react-redux";
+import { login as authLogin } from "../../store/authSlice";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,8 +18,34 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const login = async () => {
-    // something
+  const login = async (data) => {
+    // console.log(data);
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post("/api/v1/auth/login", data);
+      // console.log(response);
+      const userData = {
+        name: response?.data?.data?.name,
+        email: response?.data?.data?.email,
+        id: response?.data?.data?._id,
+        profilePicture: response?.data?.data?.profilePicture || null,
+      };
+      dispatch(
+        authLogin({
+          type: "login",
+          userData,
+        }),
+      );
+      toast.success("Logged in successfully!");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -77,12 +105,6 @@ const Login = () => {
               placeholder="Enter password"
               {...register("password", {
                 required: true,
-                validate: (value) => {
-                  if (!value.includes("@")) {
-                    return "Email must include @";
-                  }
-                  return true;
-                },
               })}
               icon={<RiLockPasswordFill className="text-gray-500 text-xl" />}
               className="w-full"

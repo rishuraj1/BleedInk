@@ -28,7 +28,7 @@ const Signup = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post("/api/v1/auth", data);
+      const response = await axios.post("/api/v1/auth/register", data);
       // console.log(response);
       dispatch(
         authLogin({
@@ -37,6 +37,7 @@ const Signup = () => {
             name: response?.data?.data?.name,
             email: response?.data?.data?.email,
             id: response?.data?.data?._id,
+            profilePicture: response?.data?.data?.profilePicture || null,
           },
         }),
       );

@@ -3,12 +3,19 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { AuthLayout } from "./components/index.js";
-import { HomePage, LoginPage, RegisterPage } from "./pages/index.js";
+import {
+  HomePage,
+  LoginPage,
+  RegisterPage,
+  CreatePost,
+} from "./pages/index.js";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { Router, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
 const router = createBrowserRouter([
   {
@@ -35,21 +42,33 @@ const router = createBrowserRouter([
           </AuthLayout>
         ),
       },
+      {
+        path: "/create-post",
+        element: (
+          <AuthLayout>
+            <CreatePost />
+          </AuthLayout>
+        ),
+      },
     ],
   },
 ]);
 
+let persistor = persistStore(store);
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
-      <ToastContainer
-        position="top-center"
-        autoClose={2000}
-        draggable
-        pauseOnHover
-        theme="colored"
-      />
+      <PersistGate persistor={persistor}>
+        <RouterProvider router={router} />
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 );

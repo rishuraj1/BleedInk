@@ -1,22 +1,41 @@
 import React, { useState } from "react";
 import { Avatar, Darkmode, Logo, Navbar } from "./";
 import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout as authLogout } from "../../store/authSlice";
+import Button from "../basics/Button";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
-  const user = useSelector((state) => state?.auth?.userData);
+  const dispatch = useDispatch();
+
+  const authStatus = useSelector((state) => state?.auth?.status);
+  // console.log(authStatus);
+  // const user = useSelector((state) => state?.auth?.userData);
   // console.log(user);
   return (
     <nav>
       <nav className="flex justify-between items-center bg-slate-300 p-3">
-        <Logo />
+        <div className="flex items-center justify-center gap-2">
+          <Logo />
+          <span className="text-center font-bold text-2xl text-blue-700">
+            BleedINK<span className="text-blue-900">.</span>
+          </span>
+        </div>
         {/* desktop */}
-        <div className="max-md:hidden flex justify-center gap-3 items-center">
-          <Navbar />
+        <div className="max-md:hidden flex justify-center gap-6 items-center">
           <Darkmode />
-          <Avatar />
+          <Navbar />
+          {authStatus && <Avatar />}
+          {authStatus && (
+            <Button
+              className="bg-red-500 hover:bg-red-700 duration-150 ease-in-out transition-all"
+              onClick={() => dispatch(authLogout())}
+            >
+              Log Out
+            </Button>
+          )}
         </div>
 
         {/* mobile */}
@@ -39,8 +58,16 @@ const Header = () => {
         </div>
       </nav>
       {openMenu && (
-        <div className="max-md:flex hidden gap-3 justify-center items-center bg-slate-300 p-3">
+        <div className="max-md:flex flex-col hidden gap-3 justify-center items-center bg-slate-300 p-3">
           <Navbar />
+          {authStatus && (
+            <Button
+              className="bg-red-500 hover:bg-red-700 duration-150 ease-in-out transition-all"
+              onClick={() => dispatch(authLogout())}
+            >
+              Log Out
+            </Button>
+          )}
         </div>
       )}
     </nav>
