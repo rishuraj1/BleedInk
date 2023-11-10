@@ -11,15 +11,18 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const authStatus = useSelector((state) => state?.auth?.status);
-  // console.log(authStatus);
-  // const user = useSelector((state) => state?.auth?.userData);
-  // console.log(user);
+
+  const handleLogout = () => {
+    dispatch(authLogout());
+    localStorage.removeItem("user");
+  };
+
   return (
     <nav>
       <nav className="flex justify-between items-center bg-slate-300 p-3">
         <div className="flex items-center justify-center gap-2">
           <Logo />
-          <span className="text-center font-bold text-2xl text-blue-700">
+          <span className="text-center font-bold text-2xl text-blue-700 max-md:hidden">
             BleedINK<span className="text-blue-900">.</span>
           </span>
         </div>
@@ -31,7 +34,7 @@ const Header = () => {
           {authStatus && (
             <Button
               className="bg-red-500 hover:bg-red-700 duration-150 ease-in-out transition-all"
-              onClick={() => dispatch(authLogout())}
+              onClick={handleLogout}
             >
               Log Out
             </Button>
@@ -41,7 +44,7 @@ const Header = () => {
         {/* mobile */}
         <div className="hidden max-md:flex gap-3 items-center">
           <Darkmode />
-          <Avatar />
+          {authStatus && <Avatar />}
           {
             <button
               className="text-white text-2xl"
@@ -59,11 +62,14 @@ const Header = () => {
       </nav>
       {openMenu && (
         <div className="max-md:flex flex-col hidden gap-3 justify-center items-center bg-slate-300 p-3">
+          <span className="text-center font-bold text-2xl text-blue-700">
+            BleedINK<span className="text-blue-900">.</span>
+          </span>
           <Navbar />
           {authStatus && (
             <Button
               className="bg-red-500 hover:bg-red-700 duration-150 ease-in-out transition-all"
-              onClick={() => dispatch(authLogout())}
+              onClick={handleLogout}
             >
               Log Out
             </Button>

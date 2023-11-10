@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login as authLogin } from "../../store/authSlice";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdAlternateEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
@@ -14,26 +14,22 @@ import axios from "axios";
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { register, handleSubmit, getValues } = useForm();
+  const { register, handleSubmit } = useForm();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
 
   const signup = async (data) => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.post("/api/v1/auth/register", data);
-      // console.log(response);
+      console.log(response);
       dispatch(
         authLogin({
           type: "signup",
           userData: {
+            username: response?.data?.data?.username,
             name: response?.data?.data?.name,
             email: response?.data?.data?.email,
             id: response?.data?.data?._id,
@@ -45,7 +41,7 @@ const Signup = () => {
       navigate("/");
     } catch (err) {
       console.log(err);
-      setError(err.message);
+      setError(err.response?.data?.message || "Something went wrong!");
       toast.error(err.message);
     } finally {
       setLoading(false);
@@ -79,6 +75,20 @@ const Signup = () => {
 
         {/* form */}
         <form onSubmit={handleSubmit(signup)} className="mt-8">
+          {/* Username */}
+          <div className="mt-4">
+            <Input
+              label="Username"
+              type="text"
+              placeholder="Enter unique username ex: rishu561"
+              {...register("username", {
+                required: true,
+              })}
+              icon={<MdAlternateEmail className="text-gray-500 text-xl" />}
+              className="w-full"
+            />
+          </div>
+
           {/* Name */}
           <div className="mt-4">
             <Input
