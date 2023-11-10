@@ -16,6 +16,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import conf from "./conf.js";
 
 const router = createBrowserRouter([
   {
@@ -57,18 +59,20 @@ const router = createBrowserRouter([
 let persistor = persistStore(store);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <RouterProvider router={router} />
-        <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          draggable
-          pauseOnHover
-          theme="colored"
-        />
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  <GoogleOAuthProvider clientId={conf.googleClientID}>
+    <React.StrictMode>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <RouterProvider router={router} />
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
+        </PersistGate>
+      </Provider>
+    </React.StrictMode>
+  </GoogleOAuthProvider>,
 );

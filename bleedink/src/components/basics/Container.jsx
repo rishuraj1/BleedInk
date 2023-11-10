@@ -1,7 +1,7 @@
 import React from "react";
 
-const Container = ({ children }) => {
-  return <div className="flex flex-col">{Container}</div>;
+const Container = ({ children, className = "" }) => {
+  return <div className={`${className} flex flex-col`}>{children}</div>;
 };
 
 export default Container;

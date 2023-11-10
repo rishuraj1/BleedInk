@@ -4,7 +4,7 @@ import { Button, Container, Footer, Header, Loader } from "./components";
 
 const App = () => {
   return (
-    <div className="flex flex-col justify-between h-[100vh] bg-gray-200">
+    <div className="min-h-screen w-full bg-gray-200 flex flex-col flex-wrap justify-between">
       <Header />
       <main>
         <Outlet />

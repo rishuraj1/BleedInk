@@ -3,7 +3,7 @@ import { Login } from "../components";
 
 const LoginPage = () => {
   return (
-    <div>
+    <div className="py-8">
       <Login />
     </div>
   );

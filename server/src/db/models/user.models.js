@@ -18,6 +18,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  bio: {
+    type: String,
+    required: false,
+  },
+  followers: {
+    type: Array,
+    required: false,
+  },
+  following: {
+    type: Array,
+    required: false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

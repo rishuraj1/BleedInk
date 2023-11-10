@@ -5,10 +5,16 @@ import { useDispatch } from "react-redux";
 import { login as authLogin } from "../../store/authSlice";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import conf from "../../conf";
+
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import axios from "axios";
+import { FcGoogle } from "react-icons/fc";
+import { GrFacebook } from "react-icons/gr";
+import { RiTwitterXFill } from "react-icons/ri";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,6 +52,19 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const responseMessage = (response) => {
+    console.log(response);
+    // const data = {
+    //   email: response?.profileObj?.email,
+    //   password: response?.profileObj?.googleId,
+    // };
+    // login(data);
+  };
+
+  const errorMessage = (error) => {
+    console.log(error);
   };
 
   return (
@@ -136,6 +155,27 @@ const Login = () => {
             </Button>
           </div>
         </form>
+
+        <p className="mt-4 text-center text-base text-black/60">
+          <span className="text-gray-500">Forgot your password? </span>
+          <Link to="/login" className="text-blue-500 hover:underline">
+            Reset Password
+          </Link>
+        </p>
+
+        <div className="flex flex-col gap-4 mt-4 justify-center items-center">
+          <p className="text-gray-500">Or login with</p>
+          <div className="flex justify-center gap-6">
+            {/* <FcGoogle className="text-2xl hover:text-[#DB4437] text-gray-700 hover:scale-110 ease-in-out duration-150 transition-all" /> */}
+            <GoogleLogin
+              onSuccess={responseMessage}
+              onError={errorMessage}
+              type="icon"
+            />
+            <GrFacebook className="text-2xl hover:text-[#4267B2] text-gray-700 hover:scale-110 ease-in-out duration-150 transition-all" />
+            <RiTwitterXFill className="text-2xl hover:scale-110 text-gray-700 hover:text-black ease-in-out duration-150 transition-all" />
+          </div>
+        </div>
       </div>
     </div>
   );
