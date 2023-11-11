@@ -42,7 +42,7 @@ const Signup = () => {
     } catch (err) {
       console.log(err);
       setError(err.response?.data?.message || "Something went wrong!");
-      toast.error(err.message);
+      toast.error(err.response?.data?.message || "Something went wrong!");
     } finally {
       setLoading(false);
     }

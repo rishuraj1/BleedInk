@@ -1,5 +1,6 @@
 import express from "express";
 import * as dotenv from "dotenv";
+import bcrypt from "bcryptjs";
 
 import User from "../models/user.models.js";
 
@@ -15,11 +16,11 @@ router.route("/register").post(async (req, res) => {
     // const existingUser = await User.userExists(username, email);
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
     // console.log(existingUser);
-    if (existingUser.email === email)
+    if (existingUser?.email === email)
       return res
         .status(400)
         .json({ success: false, message: "User already exists" });
-    if (existingUser.username === username)
+    if (existingUser?.username === username)
       return res
         .status(401)
         .json({ success: false, message: "Username already exists" });
@@ -46,7 +47,12 @@ router.route("/login").post(async (req, res) => {
       return res
         .status(400)
         .json({ success: false, message: "User does not exist" });
-    if (!User.isPasswordCorrect(password))
+    // if (!User.isPasswordCorrect(password))
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existingUser?.password,
+    );
+    if (!isPasswordCorrect)
       return res
         .status(400)
         .json({ success: false, message: "Invalid credentials" });
