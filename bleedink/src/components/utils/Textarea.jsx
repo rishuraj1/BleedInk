@@ -29,7 +29,7 @@ const Textarea = ({ name, control, label, defaultValue = "" }) => {
                 "insertdatetime media table paste code help wordcount codesample image",
               ],
               toolbar:
-                "undo redo | formatselect | bold italic backcolor | \
+                "undo redo | formatselect | image | bold italic backcolor | \
                     alignleft aligncenter alignright alignjustify | \
                     bullist numlist outdent indent | removeformat | help",
             }}

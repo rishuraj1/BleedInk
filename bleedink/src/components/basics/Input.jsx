@@ -10,7 +10,11 @@ const Input = forwardRef(function Input(
       {" "}
       {/* Added relative class to parent */}
       {icon && (
-        <div className="absolute inset-y-0 left-0 pl-1 top-[30px] text-center flex items-center pointer-events-none">
+        <div
+          className={`${
+            type === "file" ? "relative top-[60px]" : "absolute top-[30px]"
+          } inset-y-0 left-0 pl-1 text-center flex items-center pointer-events-none`}
+        >
           {icon}
         </div>
       )}
@@ -23,7 +27,11 @@ const Input = forwardRef(function Input(
         type={type}
         id={id}
         placeholder={placeholder}
-        className={`pl-8 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-sm p-2 ${className}`}
+        className={`${
+          icon ? "pl-8" : "pl-2"
+        } mt-1 focus:ring-indigo-500 focus:border-indigo-500 block ${
+          type === "file" ? "w-[250px]" : "w-full"
+        } shadow-sm sm:text-sm border-gray-300 rounded-sm p-2 ${className}`}
         ref={ref}
         {...props}
       />
