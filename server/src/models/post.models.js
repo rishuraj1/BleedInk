@@ -39,7 +39,7 @@ const postSchema = new mongoose.Schema(
       type: [commentSchema],
       required: false,
     },
-    postedBy: {
+    createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -47,7 +47,7 @@ const postSchema = new mongoose.Schema(
     isPublic: {
       type: Boolean,
       required: true,
-      default: true,
+      default: false,
       enum: [true, false],
     },
   },

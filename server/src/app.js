@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { LIMIT } from "./constants.js";
 
 import authRoute from "./routes/authRoute.js";
+import postRoute from "./routes/postRoute.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/posts", postRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

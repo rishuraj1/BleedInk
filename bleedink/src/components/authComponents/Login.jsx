@@ -38,6 +38,7 @@ const Login = () => {
         email: response?.data?.data?.email,
         id: response?.data?.data?._id,
         profilePicture: response?.data?.data?.profilePicture || null,
+        username: response?.data?.data?.username,
       };
       dispatch(
         authLogin({
