@@ -32,13 +32,18 @@ const Login = () => {
     setError(null);
     try {
       const response = await axios.post("/api/v1/auth/login", data);
-      // console.log(response);
+      console.log(response);
       const userData = {
-        name: response?.data?.data?.name,
+        name: response?.data?.data?.fullname,
         email: response?.data?.data?.email,
         id: response?.data?.data?._id,
         profilePicture: response?.data?.data?.profilePicture || null,
         username: response?.data?.data?.username,
+        coverImage: response?.data?.data?.coverImage || null,
+        posts: response?.data?.data?.posts || [],
+        followers: response?.data?.data?.followers || [],
+        following: response?.data?.data?.following || [],
+        bio: response?.data?.data?.bio || null,
       };
       dispatch(
         authLogin({

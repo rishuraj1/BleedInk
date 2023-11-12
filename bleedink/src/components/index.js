@@ -11,6 +11,12 @@ export { default as Login } from "./authComponents/Login.jsx";
 export { default as Signup } from "./authComponents/Signup.jsx";
 
 export { default as AuthLayout } from "./layouts/AuthLayout.jsx";
+export { default as DashboardLayout } from "./layouts/DashboardLayout.jsx";
 
 export { default as Textarea } from "./utils/Textarea.jsx";
 export { default as Imagebox } from "./utils/Imagebox.jsx";
+
+export { default as Sidebar } from "./dashboard/Sidebar.jsx";
+export { default as Profile } from "./dashboard/Profile.jsx";
+export { default as Profileheader } from "./dashboard/Profileheader.jsx";
+export { default as Myposts } from "./dashboard/Myposts.jsx";

@@ -1,11 +1,11 @@
 # dependencies
-/node_modules
+node_modules
 
 # build output
 /build
 
 # dotenv environment variables file
-.env
+/.env
 
 # IDE and editor files
 .vscode/

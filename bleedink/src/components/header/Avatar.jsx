@@ -1,19 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userAvatar } from "../../assets";
 
-const Avatar = () => {
+const Avatar = ({ width = "40px", height = "40px" }) => {
   const userData = useSelector((state) => state?.auth?.userData?.userData);
-  // console.log(userData);
+  console.log(userData);
+
+  const navigate = useNavigate();
 
   return (
-    <div className="rounded-full border border-black/10 bg-indigo-500">
+    <div
+      onClick={() => navigate(`/dashboard/${userData?.username}`)}
+      className="rounded-full border border-black/10 bg-indigo-500"
+    >
       <img
         src={userData?.profilePicture || userAvatar}
         alt="user avatar"
         title={userData?.name}
-        className="rounded-full p-[1px] w-10 h-10 cursor-pointer"
+        width={width}
+        height={height}
+        className={`rounded-full p-[1px] cursor-pointer`}
       />
     </div>
   );

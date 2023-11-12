@@ -5,6 +5,7 @@ import { LIMIT } from "./constants.js";
 
 import authRoute from "./routes/authRoute.js";
 import postRoute from "./routes/postRoute.js";
+import dashboardRoute from "./routes/dashboardRoute.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/posts", postRoute);
+app.use("/api/v1/dashboard", dashboardRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
