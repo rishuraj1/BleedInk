@@ -11,7 +11,6 @@ export { default as Login } from "./authComponents/Login.jsx";
 export { default as Signup } from "./authComponents/Signup.jsx";
 
 export { default as AuthLayout } from "./layouts/AuthLayout.jsx";
-export { default as DashboardLayout } from "./layouts/DashboardLayout.jsx";
 
 export { default as Textarea } from "./utils/Textarea.jsx";
 export { default as Imagebox } from "./utils/Imagebox.jsx";

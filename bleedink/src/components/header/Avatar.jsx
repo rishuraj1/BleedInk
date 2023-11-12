@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userAvatar } from "../../assets";
 
-const Avatar = ({ width = "40px", height = "40px" }) => {
+const Avatar = () => {
   const userData = useSelector((state) => state?.auth?.userData?.userData);
-  console.log(userData);
+  // console.log(userData);
 
   const navigate = useNavigate();
 
@@ -18,9 +18,7 @@ const Avatar = ({ width = "40px", height = "40px" }) => {
         src={userData?.profilePicture || userAvatar}
         alt="user avatar"
         title={userData?.name}
-        width={width}
-        height={height}
-        className={`rounded-full p-[1px] cursor-pointer`}
+        className={`rounded-full w-[40px] h-[40px] cursor-pointer`}
       />
     </div>
   );
