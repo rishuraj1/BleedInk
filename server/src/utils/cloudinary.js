@@ -15,7 +15,7 @@ const uploadImage = async (file) => {
       resource_type: "auto",
     });
     console.log(res);
-    return res?.secure_url;
+    return res?.url;
   } catch (error) {
     fs.unlinkSync(file); // Delete image from server
     console.log(error);

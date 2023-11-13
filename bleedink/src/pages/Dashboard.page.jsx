@@ -5,11 +5,11 @@ import { Profile, Myposts, Profileheader, Sidebar } from "../components";
 
 const Dashboard = () => {
   const user = useSelector((state) => state?.auth?.userData?.userData);
-  // console.log(user);
+  console.log(user);
   const { username } = useParams();
   // console.log(username);
 
-  const [tab, setTab] = useState("myposts");
+  const [tab, setTab] = useState("profile");
 
   const components = [
     {

@@ -17,12 +17,14 @@ const authSlice = createSlice({
       state.status = false;
       state.userData = null;
     },
-    dashboard: (state, action) => {
-      state.status = true;
-      state.userData = action.payload;
+    update: (state, action) => {
+      state.userData = {
+        ...state.userData,
+        ...action.payload,
+      };
     },
   },
 });
 
-export const { login, logout, dashboard } = authSlice.actions;
+export const { login, logout, update } = authSlice.actions;
 export default authSlice.reducer;

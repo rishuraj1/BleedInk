@@ -66,6 +66,24 @@ router.route("/login").post(async (req, res) => {
   }
 });
 
+//get user route
+router.route("/getuser/:username").get(async (req, res) => {
+  try {
+    console.log(req?.params?.username);
+    const usernamef = req?.params?.username;
+    const user = await User.findOne({ username: usernamef });
+    // console.log(user);
+    if (!user)
+      return res
+        .status(400)
+        .json({ success: false, message: "User does not exist" });
+    res.status(200).json({ success: true, data: user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 router.route("/").get(async (req, res) => {
   res.send("BleedINK auth route");
 });

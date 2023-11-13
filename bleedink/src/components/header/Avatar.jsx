@@ -18,7 +18,7 @@ const Avatar = () => {
         src={userData?.profilePicture || userAvatar}
         alt="user avatar"
         title={userData?.name}
-        className={`rounded-full w-[40px] h-[40px] cursor-pointer`}
+        className={`rounded-full w-[40px] h-[40px] cursor-pointer object-cover`}
       />
     </div>
   );

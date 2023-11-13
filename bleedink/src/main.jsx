@@ -9,6 +9,7 @@ import {
   RegisterPage,
   CreatePost,
   Dashboard,
+  Profilepage,
 } from "./pages/index.js";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout>
             <Dashboard />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/profile/:username",
+        element: (
+          <AuthLayout>
+            <Profilepage />
           </AuthLayout>
         ),
       },
