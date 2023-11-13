@@ -19,3 +19,4 @@ export { default as Sidebar } from "./dashboard/Sidebar.jsx";
 export { default as Profile } from "./dashboard/Profile.jsx";
 export { default as Profileheader } from "./dashboard/Profileheader.jsx";
 export { default as Myposts } from "./dashboard/Myposts.jsx";
+export { default as Profilebody } from "./dashboard/Profilebody.jsx";

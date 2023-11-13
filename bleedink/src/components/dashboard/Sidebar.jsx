@@ -13,7 +13,7 @@ const tabs = [
 
 const Sidebar = ({ setTab, tab }) => {
   return (
-    <div className="w-[30%] bg-slate-300 h-full">
+    <div className="w-[30%] max-md:flex bg-slate-300 h-full max-md:w-full max-md:h-[64px]">
       {tabs.map((t) => {
         return (
           <div

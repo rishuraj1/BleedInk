@@ -8,12 +8,12 @@ import Button from "../basics/Button";
 import { toast } from "react-toastify";
 
 const Profileheader = ({ user }) => {
-  // const userData = useSelector((state) => state?.auth?.userData);
-  // console.log(userData);
+  const { userData } = useSelector((state) => state?.auth);
+
   const { username } = useParams();
   const dispatch = useDispatch();
   const [newUser, setNewUser] = useState(user);
-  console.log(newUser);
+  // console.log(newUser);
 
   const [cover, setCover] = useState(null);
   const [coverPreview, setCoverPreview] = useState(
@@ -40,7 +40,7 @@ const Profileheader = ({ user }) => {
     try {
       if (cover && profile) {
         const formCoverData = new FormData();
-        formCoverData.append("username", userData?.userData?.username);
+        formCoverData.append("username", username);
         formCoverData.append("coverPicture", cover);
         const response = await fetch(
           "/api/v1/dashboard/updateimages/coverimage",
@@ -54,7 +54,7 @@ const Profileheader = ({ user }) => {
         console.log(data?.user?.coverImage);
 
         const formProfileData = new FormData();
-        formProfileData.append("username", userData?.userData?.username);
+        formProfileData.append("username", username);
         formProfileData.append("profilePicture", profile);
 
         const res = await fetch(
@@ -81,7 +81,7 @@ const Profileheader = ({ user }) => {
         toast.success("Cover picture and Profile picture updated successfully");
       } else if (cover) {
         const formCoverData = new FormData();
-        formCoverData.append("username", userData?.userData?.username);
+        formCoverData.append("username", username);
         formCoverData.append("coverPicture", cover);
         const response = await fetch(
           "/api/v1/dashboard/updateimages/coverimage",
@@ -105,7 +105,7 @@ const Profileheader = ({ user }) => {
         toast.success("Cover picture updated successfully");
       } else if (profile) {
         const formProfileData = new FormData();
-        formProfileData.append("username", userData?.userData?.username);
+        formProfileData.append("username", username);
         formProfileData.append("profilePicture", profile);
 
         const res = await fetch(
@@ -140,8 +140,8 @@ const Profileheader = ({ user }) => {
   };
 
   return (
-    <div className="flex relative flex-col w-full overflow-x-hidden">
-      <div className="flex group/cover relative flex-col bg-gray-400 h-[250px] border-[1.5px] border-white rounded-sm">
+    <div className="flex relative flex-col h-[300px] overflow-x-hidden">
+      <div className="flex group/cover relative flex-col bg-gray-400 h-[245px] border-[1.5px] border-white rounded-sm">
         <img
           src={coverPreview}
           alt="cover"

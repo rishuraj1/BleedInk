@@ -12,7 +12,7 @@ const Avatar = () => {
   return (
     <div
       onClick={() => navigate(`/dashboard/${userData?.username}`)}
-      className="rounded-full border border-black/10 bg-indigo-500"
+      className="rounded-full border-white border-2 bg-indigo-500"
     >
       <img
         src={userData?.profilePicture || userAvatar}

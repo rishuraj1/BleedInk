@@ -64,6 +64,32 @@ router
     }
   });
 
+//update user name or/and bio
+router.route("/updateuser").post(async (req, res) => {
+  console.log(req.body);
+  try {
+    const { username, bio, name } = req.body;
+    const updateUser = await User.findOneAndUpdate(
+      {
+        username: username,
+      },
+      {
+        bio: bio,
+        fullname: name,
+      },
+    );
+    const updatedUser = await User.findOne({
+      username: username,
+    });
+    console.log(updatedUser, 84);
+    res
+      .status(200)
+      .json({ message: "User updated successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.route("/").get(async (req, res) => {
   res.send("Hello from dashboard");
 });

@@ -23,18 +23,29 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full h-screen">
       {username === user?.username ? (
-        <div className="flex items-center justify-between w-full h-screen">
-          <Sidebar setTab={setTab} tab={tab} />
-          <div className="flex justify-between w-full h-full">
+        <>
+          <div className="flex max-md:hidden items-center justify-between w-full h-screen">
+            <Sidebar setTab={setTab} tab={tab} />
+            <div className="flex justify-between w-full h-full">
+              {components.map((component) => {
+                if (tab === component.name) {
+                  return component.component;
+                }
+              })}
+            </div>
+          </div>
+
+          <div className="hidden max-md:flex  flex-col w-full h-full">
+            <Sidebar setTab={setTab} tab={tab} />
             {components.map((component) => {
               if (tab === component.name) {
                 return component.component;
               }
             })}
           </div>
-        </div>
+        </>
       ) : (
         <h1>
           Oops! You are not authorized to view this page. Please login to view

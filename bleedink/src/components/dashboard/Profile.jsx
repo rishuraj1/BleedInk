@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Profileheader from "./Profileheader";
+import { Profileheader, Profilebody } from "../index";
 import { Avatar } from "../header";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -24,7 +24,7 @@ const Profile = () => {
       try {
         const response = await axios.get(`/api/v1/auth/getuser/${username}`);
         const data = response;
-        console.log(data);
+        // console.log(data);
         setUser({
           username: data?.data?.data?.username,
           name: data?.data?.data?.fullname,
@@ -44,15 +44,16 @@ const Profile = () => {
       }
     };
     getUser();
-  }, [username, userData?.userData]);
+  }, []);
 
   if (!user) {
     return <div className="flex p-1 w-full">Oops! User not found</div>;
   }
 
   return (
-    <div className="flex p-1 w-full">
+    <div className="flex p-1 w-full flex-col">
       <Profileheader user={user} />
+      <Profilebody user={user} />
     </div>
   );
 };

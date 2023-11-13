@@ -30,7 +30,7 @@ const Input = forwardRef(function Input(
         className={`${
           icon ? "pl-8" : "pl-2"
         } mt-1 focus:ring-indigo-500 focus:border-indigo-500 block ${
-          type === "file" ? "w-[250px]" : "w-full"
+          type === "file" ? "" : "w-full"
         } shadow-sm sm:text-sm border-gray-300 rounded-sm p-2 ${className}`}
         ref={ref}
         {...props}
