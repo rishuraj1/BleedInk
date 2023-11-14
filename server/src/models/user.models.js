@@ -48,11 +48,13 @@ const userSchema = new mongoose.Schema(
       ref: "User",
       required: false,
     },
-    posts: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Post",
-      required: false,
-    },
+    posts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+        required: false,
+      },
+    ],
   },
   { timestamps: true },
 );

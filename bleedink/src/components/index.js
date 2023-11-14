@@ -6,6 +6,7 @@ export { default as Input } from "./basics/Input.jsx";
 export { default as Button } from "./basics/Button.jsx";
 export { default as Container } from "./basics/Container.jsx";
 export { default as Loader } from "./basics/Loader.jsx";
+export { default as Postcard } from "./basics/Postcard.jsx";
 
 export { default as Login } from "./authComponents/Login.jsx";
 export { default as Signup } from "./authComponents/Signup.jsx";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { defCover, userAvatar } from "../../assets";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { BiSolidEditAlt, BiImageAdd } from "react-icons/bi";
 import { update as updatState } from "../../store/authSlice";
@@ -9,31 +9,30 @@ import { toast } from "react-toastify";
 
 const Profileheader = ({ user }) => {
   const { userData } = useSelector((state) => state?.auth);
-
   const { username } = useParams();
+  const [author, setAuthor] = useState(userData?.userData);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [newUser, setNewUser] = useState(user);
-  // console.log(newUser);
-
+  // console.log(userData);
+  // console.log(user);
+  // console.log(author);
   const [cover, setCover] = useState(null);
-  const [coverPreview, setCoverPreview] = useState(
-    newUser?.coverImage ? newUser.coverImage : defCover,
-  );
+  const [coverPreview, setCoverPreview] = useState(null);
   const [profile, setProfile] = useState(null);
-  const [profilePreview, setProfilePreview] = useState(
-    newUser?.profilePicture ? newUser?.profilePicture : userAvatar,
-  );
+  const [profilePreview, setProfilePreview] = useState(null);
   const [imageUpload, setImageUpload] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (newUser?.data?.coverImage) {
-      setCoverPreview(newUser?.data?.coverImage);
+    if (username === author?.username) navigate(`/dashboard/${username}`);
+    if (user) {
+      setCoverPreview(user?.coverImage || defCover);
+      setProfilePreview(user?.profilePicture || userAvatar);
+    } else {
+      setCoverPreview(author.coverImage || defCover);
+      setProfilePreview(author.profilePicture || userAvatar);
     }
-    if (newUser?.data?.profilePicture) {
-      setProfilePreview(newUser?.data?.profilePicture);
-    }
-  }, [newUser]);
+  }, [user, username, author.username, navigate, author]);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -140,14 +139,14 @@ const Profileheader = ({ user }) => {
   };
 
   return (
-    <div className="flex relative flex-col h-[300px] overflow-x-hidden">
+    <div className="flex relative flex-col h-full">
       <div className="flex group/cover relative flex-col bg-gray-400 h-[245px] border-[1.5px] border-white rounded-sm">
         <img
           src={coverPreview}
           alt="cover"
           className="w-full h-full object-cover rounded-sm rounded-b-none group-hover/cover:opacity-50 ease-in-out duration-150"
         />
-        {username === newUser?.username && (
+        {username === author?.username && (
           <>
             <input
               type="file"
@@ -173,10 +172,10 @@ const Profileheader = ({ user }) => {
         <img
           src={profilePreview}
           alt="user"
-          title={newUser?.name}
+          title={user?.name}
           className="bg-white border-4 border-white rounded-full w-28 h-28 object-cover group-hover/pp:opacity-50 ease-in-out duration-150"
         />
-        {username === newUser?.username && (
+        {username === author?.username && (
           <>
             <input
               type="file"
@@ -192,7 +191,7 @@ const Profileheader = ({ user }) => {
             <label htmlFor="profilePicture">
               <BiImageAdd
                 title={
-                  !newUser?.profilePicture
+                  !author?.profilePicture
                     ? "Upload profile picture"
                     : "Edit profile picture"
                 }
@@ -204,7 +203,7 @@ const Profileheader = ({ user }) => {
       </div>
       {imageUpload && (
         <Button
-          className="flex absolute right-3 top-64 bg-indigo-500 hover:bg-indigo-600 duration-150 ease-in-out transition-all my-4"
+          className="flex absolute right-8 top-[234px] bg-indigo-500 hover:bg-indigo-600 duration-150 ease-in-out transition-all my-4"
           onClick={handleSubmit}
         >
           {loading ? "Saving..." : "Save"}

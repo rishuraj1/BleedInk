@@ -11,13 +11,12 @@ const Profile = () => {
   const { username } = useParams();
 
   const userData = useSelector((state) => state?.auth?.userData);
-  console.log(userData?.userData);
+  // console.log(userData?.userData);
 
   //username, name, bio, coverImage, profilePicture, followers, following, posts
 
   useEffect(() => {
     if (userData?.userData?.username === username) {
-      setUser(userData?.userData);
       return;
     }
     const getUser = async () => {
@@ -26,6 +25,7 @@ const Profile = () => {
         const data = response;
         // console.log(data);
         setUser({
+          id: data?.data?.data?._id,
           username: data?.data?.data?.username,
           name: data?.data?.data?.fullname,
           bio: data?.data?.data?.bio || "",
@@ -45,10 +45,6 @@ const Profile = () => {
     };
     getUser();
   }, []);
-
-  if (!user) {
-    return <div className="flex p-1 w-full">Oops! User not found</div>;
-  }
 
   return (
     <div className="flex p-1 w-full flex-col">

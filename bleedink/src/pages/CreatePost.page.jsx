@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Imagebox, Input, Textarea } from "../components";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { update as updateState } from "../store/authSlice";
 import { MdTextSnippet } from "react-icons/md";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BiSolidImageAdd } from "react-icons/bi";
@@ -39,8 +40,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="py-8 items-center max-md:flex-col max-md:px-2 flex justify-around px-4 gap-3">
-      <div className="flex flex-col justify-between gap-3">
+    <div className="flex justify-around items-center py-4">
+      <div className="">
         <form onSubmit={handleSubmit(submit)} className="gap-4 flex flex-col">
           <Input
             label="Title"
@@ -53,7 +54,7 @@ const CreatePost = () => {
           <Input
             type="file"
             label="Thumbnail"
-            className="w-[100px]"
+            className="w-[250px]"
             name="thumbnail"
             {...register("thumbnail", { required: true })}
             icon={<BiSolidImageAdd className="text-xl text-slate-700" />}

@@ -18,8 +18,8 @@ const Header = () => {
   };
 
   return (
-    <nav>
-      <nav className="flex justify-between items-center bg-slate-300 p-3">
+    <nav className="top-0">
+      <nav className="flex justify-between items-center bg-slate-300 p-2.5">
         <div className="flex items-center justify-center gap-2">
           <Logo />
           <span className="text-center font-bold text-2xl text-blue-700 max-md:hidden">

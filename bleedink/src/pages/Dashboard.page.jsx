@@ -23,10 +23,11 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="w-full h-screen">
+    <>
       {username === user?.username ? (
         <>
-          <div className="flex max-md:hidden items-center justify-between w-full h-screen">
+          {/* desktop */}
+          <div className="flex max-md:hidden items-center justify-around w-full h-full">
             <Sidebar setTab={setTab} tab={tab} />
             <div className="flex justify-between w-full h-full">
               {components.map((component) => {
@@ -37,6 +38,7 @@ const Dashboard = () => {
             </div>
           </div>
 
+          {/* mobile */}
           <div className="hidden max-md:flex  flex-col w-full h-full">
             <Sidebar setTab={setTab} tab={tab} />
             {components.map((component) => {
@@ -51,7 +53,7 @@ const Dashboard = () => {
           Oops! You are not authorized to view this page. Please login to view
         </h1>
       )}
-    </div>
+    </>
   );
 };
 

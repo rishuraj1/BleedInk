@@ -33,9 +33,20 @@ router.route("/create").post(upload.single("thumbnail"), async (req, res) => {
     });
 
     console.log(updateUser);
-    res
-      .status(200)
-      .json({ success: true, message: "Post created successfully" });
+    res.status(200).json({ success: true, message: "Post created" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get posts by username
+router.route("/getposts/:id").get(async (req, res) => {
+  try {
+    const response = await Post.find({
+      createdBy: req.params.id,
+    }).populate("createdBy", "username fullname profilePicture");
+    console.log(response);
+    res.status(200).json({ success: true, posts: response });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
