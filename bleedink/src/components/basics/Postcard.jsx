@@ -1,13 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Button } from "../index";
 import parser from "html-react-parser";
 import { BiLike } from "react-icons/bi";
 import { BiSolidLike } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
 import { CgComment } from "react-icons/cg";
 
 const Postcard = ({ post }) => {
+  const { username } = useParams();
   console.log(post);
   const {
+    title,
     content,
     thumbnail,
     likes,
@@ -16,9 +20,23 @@ const Postcard = ({ post }) => {
     isPublic,
     createdAt,
   } = post;
+
   return (
-    <div className="flex flex-col gap-2 w-[380px] h-[290px] rounded-md shadow-md  hover:scale-105 duration-150 ease-in-out">
-      <div className="flex border-2 border-white rounded-md flex-col relative mt-4 bg-white">
+    <div className="mt-4 flex flex-col gap-2 w-[380px] h-[290px] rounded-md shadow-md group hover:scale-105 duration-150 ease-in-out">
+      <div className="flex border-2 border-white rounded-md flex-col relative bg-white">
+        {username === createdBy?.username && (
+          <>
+            {isPublic && (
+              <div className="hidden z-40 fixed gap-3 justify-end items-center p-2 group-hover:flex">
+                <Button className="w-15">Edit</Button>
+                <Button className="w-15 flex items-center text-center gap-2 bg-red-500 hover:bg-red-700 duration-150 ease-in-out">
+                  <MdDelete className="text-xl" />
+                  Delete
+                </Button>
+              </div>
+            )}
+          </>
+        )}
         {/* thumbnail */}
         <div className="flex relative h-[200px] w-full">
           <img
@@ -42,20 +60,34 @@ const Postcard = ({ post }) => {
       {/* content */}
       <Link to={`/posts/${post?._id}`}>
         <div className="flex justify-between items-center p-2">
-          <p className="mt-4">
-            {parser(content?.slice(0, 20) + "..." + "Read more")}
+          <p className="mt-4 font-semibold">
+            {title.length > 25 ? title.slice(0, 25) + "..." : title}
           </p>
           {/* likes and comments */}
-          <div className="pt-4 mr-2 text-center gap-2 items-center flex">
-            <div className="flex justify-center items-center">
-              <BiLike className="text-xl" />
-              <p className="text-md ml-2">{likes?.length}</p>
+          {isPublic ? (
+            <div className="pt-4 mr-2 text-center gap-2 items-center flex">
+              <div className="flex justify-center items-center">
+                <BiLike className="text-xl" />
+                <p className="text-md ml-2">{likes?.length}</p>
+              </div>
+              <div className="flex justify-center items-center">
+                <CgComment className="text-xl ml-2" />
+                <p className="text-md ml-2">{comments?.length}</p>
+              </div>
             </div>
-            <div className="flex justify-center items-center">
-              <CgComment className="text-xl ml-2" />
-              <p className="text-md ml-2">{comments?.length}</p>
+          ) : (
+            <div className="pt-4 mr-2 text-center gap-2 items-center flex">
+              <Button className="w-16">
+                <p className="text-xs text-center">Edit</p>
+              </Button>
+              <Button className="w-16">
+                <p className="text-xs text-center">Publish</p>
+              </Button>
+              <Button className="w-16 flex bg-red-500 hover:bg-red-700 duration-150 ease-in-out">
+                <p className="text-xs text-center">Delete</p>
+              </Button>
             </div>
-          </div>
+          )}
         </div>
       </Link>
     </div>
