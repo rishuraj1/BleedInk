@@ -30,7 +30,7 @@ const Signup = () => {
           type: "signup",
           userData: {
             username: response?.data?.data?.username,
-            name: response?.data?.data?.name,
+            name: response?.data?.data?.fullname,
             email: response?.data?.data?.email,
             id: response?.data?.data?._id,
             profilePicture: response?.data?.data?.profilePicture || null,

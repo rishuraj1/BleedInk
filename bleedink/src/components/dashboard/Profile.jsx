@@ -47,7 +47,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="flex p-1 w-full flex-col">
+    <div className="flex p-1 h-full w-full flex-col">
       <Profileheader user={user} />
       <Profilebody user={user} />
     </div>

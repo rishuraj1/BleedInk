@@ -40,8 +40,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="flex justify-around items-center py-4">
-      <div className="">
+    <div className="flex justify-around h-full items-center py-4">
+      <div className="h-full">
         <form onSubmit={handleSubmit(submit)} className="gap-4 flex flex-col">
           <Input
             label="Title"

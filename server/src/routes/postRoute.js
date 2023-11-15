@@ -71,6 +71,20 @@ router.route("/publish/:id").post(async (req, res) => {
   }
 });
 
+//get all public posts for home page
+router.route("/getposts").get(async (req, res) => {
+  try {
+    const response = await Post.find({ isPublic: true }).populate(
+      "createdBy",
+      "username fullname profilePicture",
+    );
+    console.log(response);
+    res.status(200).json({ success: true, posts: response });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.route("/").get(async (req, res) => {
   res.send("Hello from posts");
 });

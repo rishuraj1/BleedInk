@@ -193,7 +193,7 @@ const Profilebody = ({ user }) => {
 
       {/* posts section */}
       <div className="py-8 ml-5 flex flex-col">
-        <h1 className="text-xl">My Posts</h1>
+        <h1 className="text-xl">Posts</h1>
         <div className="flex gap-6 flex-wrap">
           {posts &&
             posts.map((post, index) => <Postcard key={index} post={post} />)}
