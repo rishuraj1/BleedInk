@@ -52,6 +52,25 @@ router.route("/getposts/:id").get(async (req, res) => {
   }
 });
 
+router.route("/publish/:id").post(async (req, res) => {
+  // console.log(req.params.id);
+  // console.log(req.body);
+  try {
+    const response = await Post.findByIdAndUpdate(req.params.id, {
+      isPublic: !req.body.isPublic,
+    });
+    // console.log(response?.isPublic);
+    if (!response?.isPublic) {
+      res.status(200).json({ success: true, message: "Post published" });
+    } else {
+      res.status(201).json({ success: true, message: "Post unpublished" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.route("/").get(async (req, res) => {
   res.send("Hello from posts");
 });

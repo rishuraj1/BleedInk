@@ -53,7 +53,6 @@ const postSchema = new mongoose.Schema(
       type: Boolean,
       required: true,
       default: false,
-      enum: [true, false],
     },
   },
   { timestamps: true },
