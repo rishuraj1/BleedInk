@@ -7,6 +7,7 @@ export { default as Button } from "./basics/Button.jsx";
 export { default as Container } from "./basics/Container.jsx";
 export { default as Loader } from "./basics/Loader.jsx";
 export { default as Postcard } from "./basics/Postcard.jsx";
+export { default as Postbox } from "./basics/Postbox.jsx";
 
 export { default as Login } from "./authComponents/Login.jsx";
 export { default as Signup } from "./authComponents/Signup.jsx";
@@ -16,6 +17,7 @@ export { default as AuthLayout } from "./layouts/AuthLayout.jsx";
 export { default as Textarea } from "./utils/Textarea.jsx";
 export { default as Imagebox } from "./utils/Imagebox.jsx";
 export { default as timestampParser } from "./utils/timestampParser.js";
+export { default as Commentbox } from "./utils/Commentbox.jsx";
 
 export { default as Profile } from "./dashboard/Profile.jsx";
 export { default as Profileheader } from "./dashboard/Profileheader.jsx";

@@ -90,6 +90,17 @@ router.route("/updateuser").post(async (req, res) => {
   }
 });
 
+//update DOB and Location
+router.route("/updateuser/doblocation").post(async (req, res) => {
+  const { username, dob, location } = req.body;
+  console.log(req.body);
+  try {
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 router.route("/").get(async (req, res) => {
   res.send("Hello from dashboard");
 });

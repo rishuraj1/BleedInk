@@ -13,7 +13,7 @@ const router = express.Router();
 
 // Create post
 router.route("/create").post(upload.single("thumbnail"), async (req, res) => {
-  console.log(req.file.path, req.body);
+  // console.log(req.file.path, req.body);
   const { title, content, userId } = req.body;
   try {
     const thumbnailURL = await uploadImage(req.file.path);
@@ -34,6 +34,19 @@ router.route("/create").post(upload.single("thumbnail"), async (req, res) => {
 
     console.log(updateUser);
     res.status(200).json({ success: true, message: "Post created" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//get post by id
+router.route("/getpost/:postId").get(async (req, res) => {
+  try {
+    const response = await Post.findById(req.params.postId)
+      .populate("createdBy", "username fullname profilePicture")
+      .populate("comments");
+    console.log(response);
+    res.status(200).json({ success: true, post: response });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -74,10 +87,9 @@ router.route("/publish/:id").post(async (req, res) => {
 //get all public posts for home page
 router.route("/getposts").get(async (req, res) => {
   try {
-    const response = await Post.find({ isPublic: true }).populate(
-      "createdBy",
-      "username fullname profilePicture",
-    );
+    const response = await Post.find({ isPublic: true })
+      .populate("createdBy", "username fullname profilePicture")
+      .sort({ updatedAt: -1 });
     console.log(response);
     res.status(200).json({ success: true, posts: response });
   } catch (error) {

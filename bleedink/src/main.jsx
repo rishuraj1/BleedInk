@@ -10,6 +10,8 @@ import {
   CreatePost,
   Dashboard,
   Profilepage,
+  Editpost,
+  Postpage,
 } from "./pages/index.js";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
@@ -66,6 +68,22 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout>
             <Profilepage />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/edit-post/:postId",
+        element: (
+          <AuthLayout>
+            <Editpost />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/posts/:viewPostId",
+        element: (
+          <AuthLayout>
+            <Postpage />
           </AuthLayout>
         ),
       },

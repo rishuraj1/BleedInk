@@ -6,12 +6,12 @@ import axios from "axios";
 
 const HomePage = () => {
   const userData = useSelector((state) => state?.auth?.userData?.userData);
-  console.log(userData);
+  // console.log(userData);
   const [posts, setPosts] = useState([]);
   const getPublicPosts = async () => {
     try {
       const response = await axios.get("/api/v1/posts/getposts");
-      console.log(response);
+      // console.log(response);
       const data = response?.data?.posts;
       setPosts(data);
     } catch (error) {
@@ -28,7 +28,7 @@ const HomePage = () => {
     ? userData?.name?.split(" ")[0] || userData?.name
     : "Guest";
 
-  console.log(userName);
+  // console.log(userName);
 
   return (
     <Container className="">
@@ -37,6 +37,7 @@ const HomePage = () => {
         <h1 className="font-semibold text-4xl">
           Welcome <span className="text-indigo-500">{userName}</span> !
         </h1>
+        <h3 className="text-center">See newer posts here</h3>
       </div>
       {/* posts */}
       <div className="flex gap-4 flex-wrap">

@@ -2,7 +2,15 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        Title: ["postTitle", "sans-serif"],
+        Body: ["Kalam", "sans-serif"],
+      },
+      backgroundImage: {
+        postbg: "url('/bleedink/src/assets/postBackground.jpg)",
+      },
+    },
   },
   plugins: [],
 };

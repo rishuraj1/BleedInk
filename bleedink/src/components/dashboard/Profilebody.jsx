@@ -5,12 +5,13 @@ import { update as editUser } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Input, Postcard } from "../../components";
 import { toast } from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
 import axios from "axios";
 
 const Profilebody = ({ user }) => {
   const { username } = useParams();
   const { userData } = useSelector((state) => state?.auth);
-  const [isAuthor, setIsAuthor] = useState(false);
+  console.log(userData?.userData);
   const [loading, setLoading] = useState(false);
   const currUser = user || userData?.userData;
   console.log(currUser);
@@ -21,13 +22,6 @@ const Profilebody = ({ user }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currUser?.username === username) {
-      setIsAuthor(true);
-      return;
-    }
-  }, [username, currUser?.currUser, currUser?.username]);
-
-  useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
@@ -35,7 +29,7 @@ const Profilebody = ({ user }) => {
         );
         const data = response?.data?.posts;
         setPosts(data);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         toast.error("Error fetching posts");
         console.log(error);
@@ -114,56 +108,61 @@ const Profilebody = ({ user }) => {
   return (
     <div className="flex flex-col mt-12">
       <div className="flex justify-between">
-        <div className="flex flex-col">
-          {loading ? (
-            <div className="flex flex-col">
-              <label htmlFor="name" className="ml-5 text-md font-semibold">
-                Edit name
-              </label>
-              <Input
-                type="text"
-                name="name"
-                className="ml-5 w-[250px]"
-                placeholder="Name"
-                defaultValue={currUser?.name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <h2 className="ml-5 text-gray-700 text-sm">
-                @{currUser?.username}
-              </h2>
-            </div>
-          ) : (
-            <div className="flex flex-col">
-              <h1 className="ml-5 text-2xl font-semibold">{currUser?.name}</h1>
-              <h2 className="ml-5 text-gray-700 text-sm">
-                @{currUser?.username}
-              </h2>
-            </div>
-          )}
-
-          <div className="mt-2">
+        <div className="flex">
+          <div className="flex flex-col gap-2">
             {loading ? (
               <div className="flex flex-col">
-                <label htmlFor="bio" className="ml-5 text-md font-semibold">
-                  Edit bio
+                <label htmlFor="name" className="ml-5 text-md font-semibold">
+                  Edit name
                 </label>
                 <Input
                   type="text"
-                  name="bio"
-                  className="ml-5 h-[80px] items-start text-start w-[350px]"
-                  placeholder="Bio"
-                  defaultValue={currUser?.bio}
-                  onChange={(e) => setBio(e.target.value)}
+                  name="name"
+                  className="ml-5 w-[250px]"
+                  placeholder="Name"
+                  defaultValue={currUser?.name}
+                  onChange={(e) => setName(e.target.value)}
                 />
+                <h2 className="ml-5 text-gray-700 text-sm">
+                  @{currUser?.username}
+                </h2>
               </div>
             ) : (
-              <p className="text-md ml-5 text-gray-900">{currUser?.bio}</p>
+              <div className="flex justify-between mr-24">
+                <div className="flex flex-col">
+                  <h1 className="ml-5 text-2xl font-semibold">
+                    {currUser?.name}
+                  </h1>
+                  <h2 className="ml-5 text-gray-700 text-sm">
+                    @{currUser?.username}
+                  </h2>
+                </div>
+              </div>
             )}
+            <div className="mt-2">
+              {loading ? (
+                <div className="flex flex-col">
+                  <label htmlFor="bio" className="ml-5 text-md font-semibold">
+                    Edit bio
+                  </label>
+                  <Input
+                    type="text"
+                    name="bio"
+                    className="ml-5 h-[80px] items-start text-start w-[350px]"
+                    placeholder="Bio"
+                    defaultValue={currUser?.bio}
+                    onChange={(e) => setBio(e.target.value)}
+                  />
+                </div>
+              ) : (
+                <p className="text-md ml-5 text-gray-900">{currUser?.bio}</p>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="flex flex-col mr-8">
-          {isAuthor ? (
+          {userData?.userData?.username === username && (
             <div className="flex gap-2">
               {!loading ? (
                 <Button
@@ -178,15 +177,13 @@ const Profilebody = ({ user }) => {
               )}
               {loading && (
                 <Button
-                  className="bg-white text-gray-900 hover:bg-gray-500"
+                  className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
                   onClick={() => setLoading(false)}
                 >
                   Cancel
                 </Button>
               )}
             </div>
-          ) : (
-            <Button className="bg-gray-200 text-gray-700">Follow</Button>
           )}
         </div>
       </div>

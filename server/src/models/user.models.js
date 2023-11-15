@@ -48,6 +48,14 @@ const userSchema = new mongoose.Schema(
       ref: "User",
       required: false,
     },
+    dob: {
+      type: Date,
+      required: false,
+    },
+    location: {
+      type: String,
+      required: false,
+    },
     posts: [
       {
         type: mongoose.Schema.Types.ObjectId,

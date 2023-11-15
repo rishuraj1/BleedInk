@@ -53,7 +53,9 @@ const Postcard = ({ post }) => {
                 <Button className="w-15 text-sm" onClick={publishPrivatePost}>
                   Unpublish
                 </Button>
-                <Button className="w-15 text-sm">Edit</Button>
+                <Link to={`/edit-post/${post?._id}`}>
+                  <Button className="w-15 text-sm">Edit</Button>
+                </Link>
                 <Button className="w-15 text-sm flex items-center text-center gap-2 bg-red-500 hover:bg-red-700 duration-150 ease-in-out">
                   <MdDelete className="text-xl" />
                   Delete
@@ -103,9 +105,11 @@ const Postcard = ({ post }) => {
           </div>
         ) : (
           <div className="pt-4 mr-2 text-center gap-2 items-center flex">
-            <Button className="w-16">
-              <p className="text-xs text-center">Edit</p>
-            </Button>
+            <Link to={`/edit-post/${post?._id}`}>
+              <Button className="w-16">
+                <p className="text-xs text-center">Edit</p>
+              </Button>
+            </Link>
             <Button className="w-16" onClick={publishPrivatePost}>
               <p className="text-xs text-center">Publish</p>
             </Button>
