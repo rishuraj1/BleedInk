@@ -33,7 +33,7 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox }) => {
 
   return (
     <div
-      className={`flex flex-col gap-3 ${
+      className={`flex max-md:w-full flex-col gap-3 ${
         isCommentBox ? "w-2/3" : "w-full"
       } px-8`}
     >

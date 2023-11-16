@@ -81,11 +81,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/posts/:viewPostId",
-        element: (
-          <AuthLayout>
-            <Postpage />
-          </AuthLayout>
-        ),
+        element: <Postpage />,
       },
     ],
   },

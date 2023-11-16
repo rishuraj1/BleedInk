@@ -32,7 +32,7 @@ const Postpage = () => {
 
   return (
     <Container>
-      <div className="flex justify-between">
+      <div className="flex justify-between max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-4">
         <Postbox
           post={post}
           isCommentBox={isCommentBox}
