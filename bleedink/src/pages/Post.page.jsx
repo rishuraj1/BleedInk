@@ -9,36 +9,36 @@ const Postpage = () => {
   const [post, setPost] = useState({});
   const [isCommentBox, setIsCommentBox] = useState(false);
 
-  const fetchPost = async () => {
-    try {
-      const response = await axios.get(`/api/v1/posts/getpost/${viewPostId}`);
-      const data = (await response?.data?.post) || {};
-      console.log(data);
-      setTimeout(() => {
-        setPost(data);
-      }, 1000);
-      console.log(post);
-    } catch (error) {
-      toast.error("Error in fetching post");
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get(`/api/v1/posts/getpost/${viewPostId}`);
+        const data = (await response?.data?.post) || {};
+        const commentData = (await response?.data?.comments) || [];
+        // console.log(data);
+        // console.log(commentData);
+        data.comments = commentData;
+        setPost(data);
+        // console.log(post);
+      } catch (error) {
+        toast.error("Error in fetching post");
+        console.log(error);
+      }
+    };
     fetchPost();
-  }, [viewPostId]);
+  }, [viewPostId, isCommentBox]);
 
   console.log(post);
 
   return (
     <Container>
-      <div className="flex justify-between max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-4">
+      <div className="flex overflow-y-scroll no-scrollbar justify-between max-md:flex-col max-md:justify-center max-md:items-center max-md:gap-4">
         <Postbox
           post={post}
           isCommentBox={isCommentBox}
           setIsCommentBox={setIsCommentBox}
         />
-        {isCommentBox && <Commentbox post={post} />}
+        {isCommentBox && <Commentbox post={post} setPost={setPost} />}
       </div>
     </Container>
   );

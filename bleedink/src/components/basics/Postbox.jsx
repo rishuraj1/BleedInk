@@ -35,7 +35,7 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox }) => {
     <div
       className={`flex max-md:w-full flex-col gap-3 ${
         isCommentBox ? "w-2/3" : "w-full"
-      } px-8`}
+      } px-8 h-full`}
     >
       {/* thumbnail and user avatar */}
       <div className="flex flex-col items-start justify-center relative">

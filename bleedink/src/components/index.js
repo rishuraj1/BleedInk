@@ -18,6 +18,7 @@ export { default as Textarea } from "./utils/Textarea.jsx";
 export { default as Imagebox } from "./utils/Imagebox.jsx";
 export { default as timestampParser } from "./utils/timestampParser.js";
 export { default as Commentbox } from "./utils/Commentbox.jsx";
+export { default as Commentdesign } from "./utils/Commentdesign.jsx";
 
 export { default as Profile } from "./dashboard/Profile.jsx";
 export { default as Profileheader } from "./dashboard/Profileheader.jsx";

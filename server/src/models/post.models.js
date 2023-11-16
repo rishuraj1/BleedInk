@@ -41,7 +41,8 @@ const postSchema = new mongoose.Schema(
       required: false,
     },
     comments: {
-      type: [commentSchema],
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Comment",
       required: false,
     },
     createdBy: {
@@ -60,6 +61,5 @@ const postSchema = new mongoose.Schema(
 
 postSchema.plugin(mongooseAggregatePaginate);
 
-const Post = mongoose.model("Post", postSchema);
-
-export default Post;
+export const Post = mongoose.model("Post", postSchema);
+export const Comment = mongoose.model("Comment", commentSchema);

@@ -1,7 +1,7 @@
 import express from "express";
 import * as dotenv from "dotenv";
 
-import Post from "../models/post.models.js";
+import { Post, Comment } from "../models/post.models.js";
 import User from "../models/user.models.js";
 
 import upload from "../middlewares/multer.middleware.js";
@@ -42,12 +42,37 @@ router.route("/create").post(upload.single("thumbnail"), async (req, res) => {
 //get post by id
 router.route("/getpost/:postId").get(async (req, res) => {
   try {
-    const response = await Post.findById(req.params.postId)
-      .populate("createdBy", "username fullname profilePicture")
-      .populate("comments");
-    console.log(response);
-    res.status(200).json({ success: true, post: response });
+    const response = await Post.findById(req.params.postId).populate(
+      "createdBy",
+      "username fullname profilePicture",
+    );
+
+    const responseComments = await Comment.find({
+      _id: { $in: response?.comments },
+    })
+      .populate("commentedBy", "username fullname profilePicture")
+      .sort({ createdAt: -1 });
+
+    // console.log(response);
+
+    res
+      .status(200)
+      .json({ success: true, post: response, comments: responseComments });
   } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//get comment by id
+router.route("/getcomment/:commentId").get(async (req, res) => {
+  try {
+    const response = await Comment.findById(req.params.commentId);
+    // console.log(response);
+
+    res.status(200).json({ success: true, comment: response });
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -58,7 +83,7 @@ router.route("/getposts/:id").get(async (req, res) => {
     const response = await Post.find({
       createdBy: req.params.id,
     }).populate("createdBy", "username fullname profilePicture");
-    console.log(response);
+    // console.log(response);
     res.status(200).json({ success: true, posts: response });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -92,6 +117,28 @@ router.route("/getposts").get(async (req, res) => {
       .sort({ updatedAt: -1 });
     console.log(response);
     res.status(200).json({ success: true, posts: response });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//comment on post
+router.route("/comment/:postId").post(async (req, res) => {
+  const { userId, comment } = req.body;
+  // console.log(req.body);
+  try {
+    const newComment = await Comment.create({
+      content: comment,
+      commentedBy: userId,
+    });
+    const response = await Post.findByIdAndUpdate(req.params.postId, {
+      $push: { comments: newComment?._id },
+    });
+    const user = User.findById(userId);
+    // console.log(newComment);
+    // console.log(response);
+    // console.log(user);
+    res.status(200).json({ success: true, message: "Comment added" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
