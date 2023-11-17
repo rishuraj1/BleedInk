@@ -70,7 +70,7 @@ const Commentbox = ({ post, setPost }) => {
 
   return (
     <div
-      className={`flex flex-col w-[40%] bg-gray-400 justify-start items-center p-2 rounded-md gap-4 max-md:w-full max-md:mt-4 max-md:rounded-none max-md:rounded-t-md max-md:rounded-b-md max-md:shadow-md max-md:bg-white
+      className={`flex flex-col w-[40%] bg-gray-400 dark:bg-gray-900 justify-start items-center p-2 rounded-md gap-4 max-md:w-full max-md:mt-4 max-md:rounded-none max-md:rounded-t-md max-md:rounded-b-md max-md:shadow-md max-md:bg-white dark:max-md:bg-white
        max-md:justify-center max-md:items-center max-md:p-4 max-md:gap-4`}
     >
       {userData ? (
@@ -91,7 +91,7 @@ const Commentbox = ({ post, setPost }) => {
             <input
               type="text"
               placeholder="Post a comment"
-              className="relative w-full flex justify-center items-center h-12 rounded-full focus:outline-none focus:border-indigo-500 p-2"
+              className="relative w-full flex justify-center items-center h-12 rounded-full focus:outline-none focus:border-indigo-500 p-2 dark:bg-slate-800 dark:text-white"
               onChange={(e) => setMyCmt(e.target.value)}
             />
             {!posting ? (
@@ -126,8 +126,10 @@ const Commentbox = ({ post, setPost }) => {
                 loop
                 autoplay
               />
-              <p className="font-semibold text-2xl ml-10">No comments yet !</p>
-              <p className="text-sm ml-10 font-semibold">
+              <p className="font-semibold text-2xl ml-10 dark:text-slate-500">
+                No comments yet !
+              </p>
+              <p className="text-sm ml-10 font-semibold dark:text-slate-300">
                 Be the first to comment
               </p>
             </div>
@@ -136,13 +138,13 @@ const Commentbox = ({ post, setPost }) => {
       ) : (
         <>
           <div className="justify-center flex flex-col items-center gap-4 md:absolute md:top-60">
-            <p className="text-xl font-bold text-slate-800">
+            <p className="text-xl font-bold text-slate-800 dark:text-slate-400">
               Looks like you are not logged in
             </p>
             <Button onClick={() => navigate("/login")} className="w-[300px]">
               Login
             </Button>
-            <p className="text-sm font-semibold">New here ?</p>
+            <p className="text-sm font-semibold dark:text-white">New here ?</p>
             <Button onClick={() => navigate("/register")}>Sign Up now</Button>
           </div>
         </>

@@ -116,28 +116,31 @@ const Profilebody = ({ user }) => {
           <div className="flex flex-col gap-2">
             {loading ? (
               <div className="flex flex-col">
-                <label htmlFor="name" className="ml-5 text-md font-semibold">
+                <label
+                  htmlFor="name"
+                  className="ml-5 text-md dark:text-slate-200 font-semibold"
+                >
                   Edit name
                 </label>
                 <Input
                   type="text"
                   name="name"
-                  className="ml-5 w-[250px]"
+                  className="ml-5 w-[250px] dark:bg-slate-800 dark:text-white items-start text-start"
                   placeholder="Name"
                   defaultValue={currUser?.name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <h2 className="ml-5 text-gray-700 text-sm">
+                <h2 className="ml-5 text-gray-200 text-sm dark:text-slate-400">
                   @{currUser?.username}
                 </h2>
               </div>
             ) : (
               <div className="flex justify-between mr-24">
                 <div className="flex flex-col">
-                  <h1 className="ml-5 text-2xl font-semibold">
+                  <h1 className="ml-5 text-2xl font-semibold dark:text-slate-200">
                     {currUser?.name}
                   </h1>
-                  <h2 className="ml-5 text-gray-700 text-sm">
+                  <h2 className="ml-5 text-gray-700 text-sm dark:text-slate-400">
                     @{currUser?.username}
                   </h2>
                 </div>
@@ -146,20 +149,25 @@ const Profilebody = ({ user }) => {
             <div className="mt-2">
               {loading ? (
                 <div className="flex flex-col">
-                  <label htmlFor="bio" className="ml-5 text-md font-semibold">
+                  <label
+                    htmlFor="bio"
+                    className="ml-5 text-md dark:text-slate-200 font-semibold"
+                  >
                     Edit bio
                   </label>
                   <Input
                     type="text"
                     name="bio"
-                    className="ml-5 h-[80px] items-start text-start w-[350px]"
+                    className="ml-5 h-[80px] dark:bg-slate-800 dark:text-white items-start text-start w-[350px]"
                     placeholder="Bio"
                     defaultValue={currUser?.bio}
                     onChange={(e) => setBio(e.target.value)}
                   />
                 </div>
               ) : (
-                <p className="text-md ml-5 text-gray-900">{currUser?.bio}</p>
+                <p className="text-md ml-5 text-gray-900 font-semibold dark:text-white">
+                  {currUser?.bio}
+                </p>
               )}
             </div>
           </div>
@@ -180,10 +188,7 @@ const Profilebody = ({ user }) => {
                 <Button onClick={handleEditProfile}>Save</Button>
               )}
               {loading && (
-                <Button
-                  className="bg-white text-black border-2 border-black hover:bg-black hover:text-white"
-                  onClick={() => setLoading(false)}
-                >
+                <Button className="" onClick={() => setLoading(false)}>
                   Cancel
                 </Button>
               )}
@@ -194,7 +199,7 @@ const Profilebody = ({ user }) => {
 
       {/* posts section */}
       <div className="py-8 ml-5 flex flex-col">
-        <h1 className="text-xl">Posts</h1>
+        <h1 className="text-xl dark:text-slate-300">Posts</h1>
         <div className="flex gap-6 flex-wrap">
           {posts &&
             posts.map((post, index) => <Postcard key={index} post={post} />)}

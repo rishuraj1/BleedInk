@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Assistant, Button, Input, Textarea } from "../components";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { update as updateState } from "../store/authSlice";
 import { MdTextSnippet } from "react-icons/md";
@@ -15,6 +16,12 @@ const CreatePost = () => {
 
   const userId = useSelector((state) => state?.auth?.userData?.userData?.id);
   // console.log(userId);
+  const username = useSelector(
+    (state) => state?.auth?.userData?.userData?.username,
+  );
+  // console.log(username);
+
+  const navigate = useNavigate();
 
   const submit = async (data) => {
     setLoading(true);
@@ -31,6 +38,7 @@ const CreatePost = () => {
       });
       console.log(response);
       toast.success("Post created successfully!");
+      navigate(`/dashboard/${username}`);
     } catch (error) {
       toast.error(error.message);
       console.log(error);
@@ -40,8 +48,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="flex gap-5 justify-between h-full items-center p-4">
-      <div className="h-full bg-slate-300 p-2 rounded-sm w-[65%]">
+    <div className="flex gap-5 justify-between h-full items-start p-4">
+      <div className="h-full bg-slate-300 dark:bg-slate-900 p-2 rounded-sm w-[65%]">
         <form onSubmit={handleSubmit(submit)} className="gap-4 flex flex-col">
           <Input
             label="Title"
@@ -75,7 +83,7 @@ const CreatePost = () => {
               <img
                 src={URL.createObjectURL(imagePreview)}
                 alt="Selected thumbnail"
-                className="w-full h-24 object-cover cursor-pointer ease-in-out rounded-sm border-indigo-500 hover:border-indigo-700 border-2"
+                className="w-1/3 h-full object-cover cursor-pointer ease-in-out rounded-sm border-indigo-500 hover:border-indigo-700 border-2"
                 title="Click to view full size"
                 onClick={() => {
                   const fullSizeImage = new Image();

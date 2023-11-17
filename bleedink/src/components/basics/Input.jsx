@@ -19,7 +19,10 @@ const Input = forwardRef(function Input(
         </div>
       )}
       {label && (
-        <label htmlFor={id} className="block text-md font-medium text-gray-700">
+        <label
+          htmlFor={id}
+          className="block text-md font-medium text-gray-700 dark:text-slate-400"
+        >
           {label}
         </label>
       )}
@@ -31,7 +34,7 @@ const Input = forwardRef(function Input(
           icon ? "pl-8" : "pl-2"
         } mt-1 focus:ring-indigo-500 focus:border-indigo-500 block ${
           type === "file" ? "" : "w-full"
-        } shadow-sm sm:text-sm border-gray-300 rounded-sm p-2 ${className}`}
+        } shadow-sm sm:text-sm border-gray-300 rounded-sm p-2 dark:bg-slate-800 dark:text-white ${className}`}
         ref={ref}
         {...props}
       />

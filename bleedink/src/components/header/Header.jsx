@@ -4,6 +4,7 @@ import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { logout as authLogout } from "../../store/authSlice";
 import Button from "../basics/Button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -19,13 +20,15 @@ const Header = () => {
 
   return (
     <nav className="top-0">
-      <nav className="flex justify-between items-center bg-slate-300 p-2.5">
-        <div className="flex items-center justify-center gap-2">
-          <Logo />
-          <span className="text-center font-bold text-2xl text-blue-700 max-md:hidden">
-            BleedINK<span className="text-blue-900">.</span>
-          </span>
-        </div>
+      <nav className="dark:bg-slate-800 flex justify-between items-center bg-slate-300 p-2.5">
+        <Link to="/">
+          <div className="flex items-center justify-center gap-2">
+            <Logo />
+            <span className="text-center font-bold text-2xl text-blue-700 max-md:hidden">
+              BleedINK<span className="text-blue-900">.</span>
+            </span>
+          </div>
+        </Link>
         {/* desktop */}
         <div className="max-md:hidden flex justify-center gap-6 items-center">
           <Darkmode />

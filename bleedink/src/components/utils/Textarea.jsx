@@ -6,7 +6,10 @@ const Textarea = ({ name, control, label, defaultValue = "" }) => {
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label className="text-slate-700 text-sm font-medium" htmlFor={name}>
+        <label
+          className="text-slate-700 dark:text-slate-400 text-sm font-medium"
+          htmlFor={name}
+        >
           {label}
         </label>
       )}
@@ -16,6 +19,7 @@ const Textarea = ({ name, control, label, defaultValue = "" }) => {
         defaultValue={defaultValue}
         render={({ field: { onChange, value, ref } }) => (
           <Editor
+            value={value}
             apiKey="8u4pyettrrm0120jrza87yfdqg1ioqtcij6s0hszam4f5azm"
             onInit={(evt, editor) => (ref.current = editor)}
             initialValue={defaultValue}
@@ -24,6 +28,7 @@ const Textarea = ({ name, control, label, defaultValue = "" }) => {
               height: 500,
               menubar: false,
               plugins: [
+                "importcss code codesample directionality emoticons fullscreen hr image imagetools",
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code fullscreen",
                 "insertdatetime media table paste code help wordcount codesample image",

@@ -36,18 +36,20 @@ const Commentdesign = ({ comment, authorId }) => {
 
   return (
     <div className="flex items-center w-full">
-      <div className="flex gap-4 items-start bg-white p-2 rounded-md w-full">
+      <div className="flex gap-4 items-start bg-white dark:bg-slate-800 p-2 rounded-md w-full">
         {userDP}
         <div className="flex flex-col gap-1">
           <div className="flex gap-2 items-center">
-            <p className="font-semibold">
+            <p className="font-semibold dark:text-slate-100">
               {thisComment?.commentedBy?.fullname}
             </p>
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500 dark:text-slate-300">
               {timestampParser(thisComment?.createdAt)}
             </p>
           </div>
-          <p className="text-sm">{thisComment?.content}</p>
+          <p className="text-sm dark:text-white font-Body">
+            {thisComment?.content}
+          </p>
         </div>
       </div>
     </div>

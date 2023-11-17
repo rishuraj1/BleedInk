@@ -86,18 +86,18 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
           <span className="text-slate-800 text-xl gap-2 flex items-center">
             {isLiked ? (
               <BiSolidLike
-                className="text-3xl text-indigo-500"
+                className="text-3xl text-indigo-500 cursor-pointer"
                 title="Liked"
                 onClick={handleLike}
               />
             ) : (
               <BiLike
-                className="text-3xl text-slate-800"
+                className="text-3xl text-slate-800 dark:text-slate-600 hover:text-indigo-500 duration-200 transition-all ease-in-out cursor-pointer"
                 title="Like"
                 onClick={handleLike}
               />
             )}
-            {likes?.length}
+            <span className="dark:text-slate-50">{likes?.length}</span>
           </span>
         </div>
         <div className="flex justify-between items-center">
@@ -105,28 +105,22 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
             <BiCommentDetail
               className={`text-3xl ${
                 isCommentBox
-                  ? "text-indigo-500 hover:text-indigo-700"
+                  ? "text-indigo-500 hover:text-indigo-700 dark:text-indigo-500 dark:hover:text-indigo-700"
                   : "text-slate-800 hover:text-slate-900"
-              } duration-200 transition-all ease-in-out cursor-pointer`}
+              } duration-200 transition-all ease-in-out cursor-pointer dark:text-slate-600 hover:text-indigo-500 dark:hover:text-indigo-700`}
               title="Comments"
               onClick={() => setIsCommentBox(!isCommentBox)}
             />
-            {comments?.length}
+            <span className="dark:text-slate-50">{comments?.length}</span>
           </span>
         </div>
       </div>
       {/* title && content */}
       <div className="items-center mt-10 justify-center flex flex-col">
         <div className="flex justify-center items-center">
-          <sup>
-            <ImQuotesLeft className="inline-block text-4xl text-slate-900" />
-          </sup>
           <span className="px-2 text-indigo-500 font-Title text-[45px]">
             {title}
           </span>
-          <sup>
-            <ImQuotesRight className="inline-block text-4xl text-slate-900" />
-          </sup>
         </div>
         <h2 className="">
           <span className="hover:text-slate-800 duration-150 ease-in-out transition-all">
@@ -134,7 +128,7 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
               className="font-Body font-semibold text-2xl"
               to={`/profile/${createdBy?._id}`}
             >
-              {createdBy?.fullname}
+              <span className="dark:text-slate-50">{createdBy?.fullname}</span>
             </Link>
           </span>
         </h2>

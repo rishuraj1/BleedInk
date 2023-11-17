@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center w-full">
       <div
-        className={`mx-auto w-full max-w-lg bg-gray-100 rounded-lg p-10 border border-black/10`}
+        className={`mx-auto w-full max-w-lg bg-gray-100 dark:bg-slate-900 rounded-lg p-10 border border-black/10`}
       >
         <div className="mb-2 flex-col items-center flex justify-center">
           {/*Logo  */}
@@ -76,11 +76,13 @@ const Login = () => {
             BleedINK<span className="font-extrabold text-blue-900">.</span>
           </h1>
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight">
+        <h2 className="text-center text-2xl font-bold leading-tight dark:text-white">
           Log in to your account
         </h2>
         <p className="mt-2 text-center text-base text-black/60">
-          <span className="text-gray-500">Don't have an account? </span>
+          <span className="text-gray-500 dark:text-slate-200">
+            Don't have an account?{" "}
+          </span>
           <Link to="/register" className="text-blue-500 hover:underline">
             Sign Up
           </Link>

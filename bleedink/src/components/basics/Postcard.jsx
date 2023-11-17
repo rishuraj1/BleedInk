@@ -98,9 +98,9 @@ const Postcard = ({ post }) => {
   };
 
   return (
-    <div className="mt-4 flex flex-col gap-2 w-[380px] h-[300px] rounded-md shadow-md group hover:scale-105 duration-150 ease-in-out">
+    <div className="mt-4 flex flex-col gap-2 w-[450px] h-[310px] rounded-md shadow-md group hover:scale-105 duration-150 ease-in-out dark:bg-slate-900">
       <div className="flex border-2 border-white rounded-md flex-col relative bg-white">
-        {userData?.userData?.username === createdBy?.username && (
+        {userData?.username === createdBy?.username && (
           <>
             {isPublic && (
               <div className="hidden z-40 fixed gap-3 justify-end items-center p-2 group-hover:flex">
@@ -144,7 +144,7 @@ const Postcard = ({ post }) => {
       {/* title */}
       <div className="flex justify-between items-center p-2">
         <Link to={`/posts/${post?._id}`}>
-          <p className="mt-4 font-semibold">
+          <p className="mt-4 font-semibold dark:text-slate-400">
             {title.length > 16 ? title.slice(0, 14) + "..." : title}
           </p>
         </Link>
@@ -158,21 +158,27 @@ const Postcard = ({ post }) => {
                   title="Unlike"
                   onClick={handleLike}
                 />
-                <p className="text-md ml-2">{likes?.length}</p>
+                <p className="text-md ml-2 dark:text-slate-50">
+                  {likes?.length}
+                </p>
               </div>
             ) : (
               <div className="flex justify-center items-center">
                 <BiLike
-                  className="text-xl cursor-pointer"
+                  className="text-xl cursor-pointer dark:text-slate-600"
                   onClick={handleLike}
                 />
-                <p className="text-md ml-2">{likes?.length}</p>
+                <p className="text-md ml-2 dark:text-slate-50">
+                  {likes?.length}
+                </p>
               </div>
             )}
             <Link to={`/posts/${post?._id}`}>
               <div className="flex justify-center items-center">
-                <CgComment className="text-xl ml-2 cursor-pointer" />
-                <p className="text-md ml-2">{comments?.length}</p>
+                <CgComment className="text-xl dark:text-slate-600 ml-2 cursor-pointer" />
+                <p className="text-md ml-2 dark:text-slate-50">
+                  {comments?.length}
+                </p>
               </div>
             </Link>
           </div>
@@ -194,8 +200,10 @@ const Postcard = ({ post }) => {
       </div>
       <div className="px-2 pb-2">
         <p className="text-xs text-gray-600 flex items-center gap-1 text-center">
-          <BiTime className="text-xs" />
-          {timestampParser(createdAt)}
+          <BiTime className="text-xs dark:text-slate-300" />
+          <span className="dark:text-slate-300">
+            {timestampParser(createdAt)}
+          </span>
         </p>
       </div>
     </div>

@@ -44,7 +44,7 @@ const Navbar = () => {
                 <Button onClick={() => navigate(item.path)}>{item.name}</Button>
               ) : (
                 <Link
-                  className={`text-slate-950 hover:text-slate-800 font-semibold duration-150 ease-in-out transition-all text-lg`}
+                  className={`text-slate-950 dark:text-slate-100 hover:text-slate-800 font-semibold duration-150 ease-in-out transition-all text-lg`}
                   to={item.path}
                 >
                   {item.name}

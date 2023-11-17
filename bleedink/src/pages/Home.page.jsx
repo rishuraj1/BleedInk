@@ -38,10 +38,12 @@ const HomePage = () => {
     <Container className="">
       {/* top */}
       <div className="flex justify-start items-end gap-6">
-        <h1 className="font-semibold text-4xl">
+        <h1 className="font-semibold text-4xl dark:text-slate-100">
           Welcome <span className="text-indigo-500">{userName}</span> !
         </h1>
-        <h3 className="text-center font-semibold">See newer posts here</h3>
+        <h3 className="text-center font-semibold dark:text-slate-400">
+          See newer posts here
+        </h3>
       </div>
       {/* posts */}
       <div className="flex gap-4 flex-wrap">
