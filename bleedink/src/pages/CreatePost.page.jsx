@@ -40,7 +40,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="flex justify-between h-full items-center p-4">
+    <div className="flex gap-5 justify-between h-full items-center p-4">
       <div className="h-full bg-slate-300 p-2 rounded-sm w-[65%]">
         <form onSubmit={handleSubmit(submit)} className="gap-4 flex flex-col">
           <Input
