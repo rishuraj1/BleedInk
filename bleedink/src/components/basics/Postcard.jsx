@@ -43,6 +43,18 @@ const Postcard = ({ post }) => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/v1/posts/delete/${post?._id}`);
+      toast.success("Post deleted successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="mt-4 flex flex-col gap-2 w-[380px] h-[300px] rounded-md shadow-md group hover:scale-105 duration-150 ease-in-out">
       <div className="flex border-2 border-white rounded-md flex-col relative bg-white">
@@ -56,7 +68,10 @@ const Postcard = ({ post }) => {
                 <Link to={`/edit-post/${post?._id}`}>
                   <Button className="w-15 text-sm">Edit</Button>
                 </Link>
-                <Button className="w-15 text-sm flex items-center text-center gap-2 bg-red-500 hover:bg-red-700 duration-150 ease-in-out">
+                <Button
+                  onClick={handleDelete}
+                  className="w-15 text-sm flex items-center text-center gap-2 bg-red-500 hover:bg-red-700 duration-150 ease-in-out"
+                >
                   <MdDelete className="text-xl" />
                   Delete
                 </Button>

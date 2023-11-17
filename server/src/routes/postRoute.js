@@ -42,10 +42,9 @@ router.route("/create").post(upload.single("thumbnail"), async (req, res) => {
 //get post by id
 router.route("/getpost/:postId").get(async (req, res) => {
   try {
-    const response = await Post.findById(req.params.postId).populate(
-      "createdBy",
-      "username fullname profilePicture",
-    );
+    const response = await Post.findById(req.params.postId)
+      .populate("createdBy", "username fullname profilePicture")
+      .populate("likes", "User");
 
     const responseComments = await Comment.find({
       _id: { $in: response?.comments },
@@ -90,6 +89,7 @@ router.route("/getposts/:id").get(async (req, res) => {
   }
 });
 
+// publish or unpublish post
 router.route("/publish/:id").post(async (req, res) => {
   // console.log(req.params.id);
   // console.log(req.body);
@@ -139,6 +139,43 @@ router.route("/comment/:postId").post(async (req, res) => {
     // console.log(response);
     // console.log(user);
     res.status(200).json({ success: true, message: "Comment added" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//delete post by id
+router.route("/delete/:postId").delete(async (req, res) => {
+  try {
+    const response = await Post.findByIdAndDelete(req.params.postId);
+    // console.log(response);
+    res.status(200).json({ success: true, message: "Post deleted" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//add or remove a like
+router.route("/like/:userId/:postId").post(async (req, res) => {
+  // console.log(req.params, req.body);
+  try {
+    const response = await Post.findById(req.params.postId);
+    console.log(response);
+    const ifLiked = await response.likes.includes(req.params.userId);
+    console.log(ifLiked);
+    if (ifLiked) {
+      await Post.findByIdAndUpdate(req.params.postId, {
+        $pull: { likes: req.params.userId },
+      });
+      console.log("removed");
+      res.status(200).json({ success: true, message: "Like removed" });
+    } else {
+      await Post.findByIdAndUpdate(req.params.postId, {
+        $push: { likes: req.params.userId },
+      });
+      console.log("added");
+      res.status(200).json({ success: true, message: "Like added" });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

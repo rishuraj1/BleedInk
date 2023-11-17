@@ -5,14 +5,19 @@ import { ImQuotesLeft, ImQuotesRight } from "react-icons/im";
 import parse from "html-react-parser";
 import { BiLike, BiSolidLike, BiCommentDetail } from "react-icons/bi";
 import { postBackground } from "../../assets";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
-const Postbox = ({ post, setIsCommentBox, isCommentBox }) => {
-  const [thisPost, setThisPost] = useState({});
+const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
+  const [thisPost, setThisPost] = useState(post);
+  const userData = useSelector((state) => state?.auth?.userData?.userData);
+  console.log(userData);
   // console.log(post);
 
   useEffect(() => {
     setThisPost(post);
-  }, [post]);
+  }, [post, setThisPost, thisPost]);
 
   console.log(thisPost);
 
@@ -28,6 +33,25 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox }) => {
     isPublic,
     comments,
   } = thisPost;
+
+  const isLiked = thisPost?.likes?.some((like) => like._id === userData?.id);
+  console.log(isLiked);
+
+  const handleLike = async () => {
+    try {
+      await axios.post(`/api/v1/posts/like/${userData?.id}/${thisPost?._id}`);
+      const updatedpost = await axios.get(
+        `/api/v1/posts/getpost/${thisPost?._id}`,
+      );
+      const data = (await updatedpost?.data?.post) || {};
+      const commentData = (await updatedpost?.data?.comments) || [];
+      data.comments = commentData;
+      setPost(data);
+      toast.success("Like updated");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (!thisPost) return <div>Invalid</div>;
 
@@ -59,7 +83,19 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox }) => {
       <div className="flex mt-4 justify-end gap-6">
         <div className="flex justify-between items-center">
           <span className="text-slate-800 text-xl gap-2 flex items-center">
-            <BiLike className="text-3xl text-slate-800" title="Like" />
+            {isLiked ? (
+              <BiSolidLike
+                className="text-3xl text-indigo-500"
+                title="Liked"
+                onClick={handleLike}
+              />
+            ) : (
+              <BiLike
+                className="text-3xl text-slate-800"
+                title="Like"
+                onClick={handleLike}
+              />
+            )}
             {likes?.length}
           </span>
         </div>

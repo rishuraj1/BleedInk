@@ -47,11 +47,11 @@ const Commentbox = ({ post, setPost }) => {
       toast.success("Comment posted");
 
       // update post
-      const updateduser = await axios.get(
+      const updatedpost = await axios.get(
         `/api/v1/posts/getpost/${thisPost?._id}`,
       );
-      const data = (await updateduser?.data?.post) || {};
-      const commentData = (await updateduser?.data?.comments) || [];
+      const data = (await updatedpost?.data?.post) || {};
+      const commentData = (await updatedpost?.data?.comments) || [];
       data.comments = commentData;
       setPost(data);
       setMyCmt("");
@@ -109,7 +109,7 @@ const Commentbox = ({ post, setPost }) => {
 
           {/* comments section */}
           {thisPost?.comments?.length > 0 ? (
-            <div className="flex flex-col gap-3 items-center justify-center w-full">
+            <div className="flex flex-col gap-3 items-center justify-center">
               {thisPost?.comments?.map((comment, index) => (
                 <Commentdesign
                   comment={comment}

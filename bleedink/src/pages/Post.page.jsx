@@ -15,7 +15,7 @@ const Postpage = () => {
         const response = await axios.get(`/api/v1/posts/getpost/${viewPostId}`);
         const data = (await response?.data?.post) || {};
         const commentData = (await response?.data?.comments) || [];
-        // console.log(data);
+        console.log(data);
         // console.log(commentData);
         data.comments = commentData;
         setPost(data);
@@ -37,6 +37,7 @@ const Postpage = () => {
           post={post}
           isCommentBox={isCommentBox}
           setIsCommentBox={setIsCommentBox}
+          setPost={setPost}
         />
         {isCommentBox && <Commentbox post={post} setPost={setPost} />}
       </div>
