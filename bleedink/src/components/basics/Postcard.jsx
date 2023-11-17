@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, timestampParser } from "../index";
 import parser from "html-react-parser";
@@ -12,11 +12,33 @@ import { useSelector } from "react-redux";
 import { userAvatar } from "../../assets";
 
 const Postcard = ({ post }) => {
-  const { userData } = useSelector((state) => state?.auth);
+  const [thisPost, setThisPost] = useState(post);
+  const userData = useSelector((state) => state?.auth?.userData?.userData);
   console.log(userData);
   const { username } = useParams();
   console.log(post);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const updatedpost = await axios.get(
+          `/api/v1/posts/getpost/${thisPost?._id}`,
+        );
+        const data = (await updatedpost?.data?.post) || {};
+        const commentData = (await updatedpost?.data?.comments) || [];
+        data.comments = commentData;
+        setThisPost(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPost();
+  }, [thisPost?._id, setThisPost]);
+
+  console.log(thisPost);
+
   const {
+    _id,
     title,
     content,
     thumbnail,
@@ -26,7 +48,10 @@ const Postcard = ({ post }) => {
     isPublic,
     createdAt,
     updatedAt,
-  } = post;
+  } = thisPost;
+
+  const isLiked = thisPost?.likes?.some((like) => like._id === userData?.id);
+  console.log(isLiked);
 
   const publishPrivatePost = async () => {
     try {
@@ -50,6 +75,23 @@ const Postcard = ({ post }) => {
       setTimeout(() => {
         window.location.reload();
       }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLike = async () => {
+    try {
+      await axios.post(`/api/v1/posts/like/${userData?.id}/${_id}`);
+      // setIsLiked(!isLiked);
+      // toast.success("Like updated");
+      const updatedpost = await axios.get(
+        `/api/v1/posts/getpost/${thisPost?._id}`,
+      );
+      const data = (await updatedpost?.data?.post) || {};
+      const commentData = (await updatedpost?.data?.comments) || [];
+      data.comments = commentData;
+      setThisPost(data);
     } catch (error) {
       console.log(error);
     }
@@ -109,14 +151,30 @@ const Postcard = ({ post }) => {
         {/* likes and comments */}
         {isPublic ? (
           <div className="pt-4 mr-2 text-center gap-2 items-center flex">
-            <div className="flex justify-center items-center">
-              <BiLike className="text-xl" />
-              <p className="text-md ml-2">{likes?.length}</p>
-            </div>
-            <div className="flex justify-center items-center">
-              <CgComment className="text-xl ml-2" />
-              <p className="text-md ml-2">{comments?.length}</p>
-            </div>
+            {isLiked ? (
+              <div className="flex justify-center items-center">
+                <BiSolidLike
+                  className={`text-xl cursor-pointer text-indigo-500 hover:text-indigo-600 ease-in-out duration-150`}
+                  title="Unlike"
+                  onClick={handleLike}
+                />
+                <p className="text-md ml-2">{likes?.length}</p>
+              </div>
+            ) : (
+              <div className="flex justify-center items-center">
+                <BiLike
+                  className="text-xl cursor-pointer"
+                  onClick={handleLike}
+                />
+                <p className="text-md ml-2">{likes?.length}</p>
+              </div>
+            )}
+            <Link to={`/posts/${post?._id}`}>
+              <div className="flex justify-center items-center">
+                <CgComment className="text-xl ml-2 cursor-pointer" />
+                <p className="text-md ml-2">{comments?.length}</p>
+              </div>
+            </Link>
           </div>
         ) : (
           <div className="pt-4 mr-2 text-center gap-2 items-center flex">
@@ -137,7 +195,7 @@ const Postcard = ({ post }) => {
       <div className="px-2 pb-2">
         <p className="text-xs text-gray-600 flex items-center gap-1 text-center">
           <BiTime className="text-xs" />
-          {timestampParser(updatedAt)}
+          {timestampParser(createdAt)}
         </p>
       </div>
     </div>

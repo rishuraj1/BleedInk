@@ -40,6 +40,7 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
   const handleLike = async () => {
     try {
       await axios.post(`/api/v1/posts/like/${userData?.id}/${thisPost?._id}`);
+      // setIsLiked(!isLiked);
       const updatedpost = await axios.get(
         `/api/v1/posts/getpost/${thisPost?._id}`,
       );

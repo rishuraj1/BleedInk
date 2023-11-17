@@ -13,6 +13,10 @@ const HomePage = () => {
       const response = await axios.get("/api/v1/posts/getposts");
       // console.log(response);
       const data = response?.data?.posts;
+      // set posts by createdAt
+      data.sort((a, b) => {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      });
       setPosts(data);
     } catch (error) {
       toast.error("Something went wrong");
@@ -33,11 +37,11 @@ const HomePage = () => {
   return (
     <Container className="">
       {/* top */}
-      <div className="flex justify-start items-start">
+      <div className="flex justify-start items-end gap-6">
         <h1 className="font-semibold text-4xl">
           Welcome <span className="text-indigo-500">{userName}</span> !
         </h1>
-        <h3 className="text-center">See newer posts here</h3>
+        <h3 className="text-center font-semibold">See newer posts here</h3>
       </div>
       {/* posts */}
       <div className="flex gap-4 flex-wrap">

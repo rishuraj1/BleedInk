@@ -15,7 +15,7 @@ export { default as Signup } from "./authComponents/Signup.jsx";
 export { default as AuthLayout } from "./layouts/AuthLayout.jsx";
 
 export { default as Textarea } from "./utils/Textarea.jsx";
-export { default as Imagebox } from "./utils/Imagebox.jsx";
+export { default as Assistant } from "./utils/Assistant.jsx";
 export { default as timestampParser } from "./utils/timestampParser.js";
 export { default as Commentbox } from "./utils/Commentbox.jsx";
 export { default as Commentdesign } from "./utils/Commentdesign.jsx";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Imagebox, Input, Textarea } from "../components";
+import { Assistant, Button, Input, Textarea } from "../components";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { update as updateState } from "../store/authSlice";
@@ -40,8 +40,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="flex justify-around h-full items-center py-4">
-      <div className="h-full">
+    <div className="flex justify-between h-full items-center p-4">
+      <div className="h-full bg-slate-300 p-2 rounded-sm w-[65%]">
         <form onSubmit={handleSubmit(submit)} className="gap-4 flex flex-col">
           <Input
             label="Title"
@@ -97,7 +97,7 @@ const CreatePost = () => {
           </Button>
         </form>
       </div>
-      <Imagebox />
+      <Assistant />
     </div>
   );
 };

@@ -28,6 +28,9 @@ const Profilebody = ({ user }) => {
           `/api/v1/posts/getposts/${currUser?.id}`,
         );
         const data = response?.data?.posts;
+        data.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
         setPosts(data);
         // console.log(data);
       } catch (error) {
@@ -36,7 +39,8 @@ const Profilebody = ({ user }) => {
       }
     };
     fetchPosts();
-  }, [currUser]);
+  }, [currUser?.id]);
+  console.log(posts);
 
   const handleEditProfile = async () => {
     try {

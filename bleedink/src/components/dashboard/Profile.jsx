@@ -44,7 +44,9 @@ const Profile = () => {
       }
     };
     getUser();
-  }, []);
+  }, [setUser]);
+
+  console.log(user);
 
   return (
     <div className="flex p-1 h-full w-full flex-col">
