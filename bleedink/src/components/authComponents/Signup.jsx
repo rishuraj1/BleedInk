@@ -10,6 +10,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import axios from "axios";
+import conf from "../../conf";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -23,7 +24,10 @@ const Signup = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post("/api/v1/auth/register", data);
+      const response = await axios.post(
+        `${conf.backendURL}/api/v1/auth/register`,
+        data,
+      );
       console.log(response);
       dispatch(
         authLogin({

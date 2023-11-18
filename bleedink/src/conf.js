@@ -1,6 +1,5 @@
 const conf = {
-  googleClientID: String(import.meta.env.VITE_GOOGLE_CLIENT_ID),
-  googleClientSecret: String(import.meta.env.VITE_GOOGLE_CLIENT_SECRET),
+  backendURL: String(import.meta.env.VITE_BACKEND_URL),
 };
 
 export default conf;

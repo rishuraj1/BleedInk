@@ -3,6 +3,7 @@ import Input from "../basics/Input";
 import Button from "../basics/Button";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import conf from "../../conf";
 
 const Assistant = () => {
   const userData = useSelector((state) => state?.auth?.userData?.userData);
@@ -15,7 +16,7 @@ const Assistant = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const res = await axios.post("/api/v1/gpt", {
+      const res = await axios.post(`${conf.backendURL}/api/v1/gpt`, {
         prompt: JSON.stringify(prompt),
       });
       const data = res.data?.data?.choices[0]?.text;

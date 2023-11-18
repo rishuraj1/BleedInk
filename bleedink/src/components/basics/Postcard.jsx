@@ -10,6 +10,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { userAvatar } from "../../assets";
+import conf from "../../conf";
 
 const Postcard = ({ post }) => {
   const [thisPost, setThisPost] = useState(post);
@@ -22,7 +23,7 @@ const Postcard = ({ post }) => {
     const fetchPost = async () => {
       try {
         const updatedpost = await axios.get(
-          `/api/v1/posts/getpost/${thisPost?._id}`,
+          `${conf.backendURL}/api/v1/posts/getpost/${thisPost?._id}`,
         );
         const data = (await updatedpost?.data?.post) || {};
         const commentData = (await updatedpost?.data?.comments) || [];
@@ -55,9 +56,12 @@ const Postcard = ({ post }) => {
 
   const publishPrivatePost = async () => {
     try {
-      const response = await axios.post(`/api/v1/posts/publish/${post?._id}`, {
-        isPublic: post?.isPublic,
-      });
+      const response = await axios.post(
+        `${conf.backendURL}/api/v1/posts/publish/${post?._id}`,
+        {
+          isPublic: post?.isPublic,
+        },
+      );
       // console.log(response);
       toast.success(response?.data?.message);
       setTimeout(() => {
@@ -70,7 +74,7 @@ const Postcard = ({ post }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/v1/posts/delete/${post?._id}`);
+      await axios.delete(`${conf.backendURL}/api/v1/posts/delete/${post?._id}`);
       toast.success("Post deleted successfully");
       setTimeout(() => {
         window.location.reload();
@@ -82,11 +86,13 @@ const Postcard = ({ post }) => {
 
   const handleLike = async () => {
     try {
-      await axios.post(`/api/v1/posts/like/${userData?.id}/${_id}`);
+      await axios.post(
+        `${conf.backendURL}/api/v1/posts/like/${userData?.id}/${_id}`,
+      );
       // setIsLiked(!isLiked);
       // toast.success("Like updated");
       const updatedpost = await axios.get(
-        `/api/v1/posts/getpost/${thisPost?._id}`,
+        `${conf.backendURL}/api/v1/posts/getpost/${thisPost?._id}`,
       );
       const data = (await updatedpost?.data?.post) || {};
       const commentData = (await updatedpost?.data?.comments) || [];

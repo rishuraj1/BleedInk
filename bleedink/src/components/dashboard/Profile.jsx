@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
+import conf from "../../conf";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -21,7 +22,9 @@ const Profile = () => {
     }
     const getUser = async () => {
       try {
-        const response = await axios.get(`/api/v1/auth/getuser/${username}`);
+        const response = await axios.get(
+          `${conf.backendURL}/api/v1/auth/getuser/${username}`,
+        );
         const data = response;
         // console.log(data);
         setUser({

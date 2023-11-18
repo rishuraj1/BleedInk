@@ -31,7 +31,10 @@ const Login = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post("/api/v1/auth/login", data);
+      const response = await axios.post(
+        `${conf.backendURL}/api/v1/auth/login`,
+        data,
+      );
       console.log(response);
       const userData = {
         name: response?.data?.data?.fullname,

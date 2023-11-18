@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Commentbox, Container, Postbox } from "../components";
 import axios from "axios";
 import { toast } from "react-toastify";
+import conf from "../conf";
 
 const Postpage = () => {
   const { viewPostId } = useParams();
@@ -12,7 +13,9 @@ const Postpage = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`/api/v1/posts/getpost/${viewPostId}`);
+        const response = await axios.get(
+          `${conf.backendURL}/api/v1/posts/getpost/${viewPostId}`,
+        );
         const data = (await response?.data?.post) || {};
         const commentData = (await response?.data?.comments) || [];
         console.log(data);

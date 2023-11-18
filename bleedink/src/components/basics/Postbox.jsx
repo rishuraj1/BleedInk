@@ -8,6 +8,7 @@ import { postBackground } from "../../assets";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import conf from "../../conf";
 
 const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
   const [thisPost, setThisPost] = useState(post);
@@ -39,10 +40,12 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
 
   const handleLike = async () => {
     try {
-      await axios.post(`/api/v1/posts/like/${userData?.id}/${thisPost?._id}`);
+      await axios.post(
+        `${conf.backendURL}/api/v1/posts/like/${userData?.id}/${thisPost?._id}`,
+      );
       // setIsLiked(!isLiked);
       const updatedpost = await axios.get(
-        `/api/v1/posts/getpost/${thisPost?._id}`,
+        `${conf.backendURL}/api/v1/posts/getpost/${thisPost?._id}`,
       );
       const data = (await updatedpost?.data?.post) || {};
       const commentData = (await updatedpost?.data?.comments) || [];

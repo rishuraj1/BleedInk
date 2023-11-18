@@ -8,6 +8,7 @@ import { MdTextSnippet } from "react-icons/md";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { toast } from "react-toastify";
+import conf from "../conf";
 
 const CreatePost = () => {
   const { register, handleSubmit, setValue, control, getValues } = useForm();
@@ -32,7 +33,7 @@ const CreatePost = () => {
       formData.set("title", data.title);
       formData.set("content", data.content);
       formData.set("thumbnail", data.thumbnail[0]);
-      const response = await fetch("/api/v1/posts/create", {
+      const response = await fetch(`${conf.backendURL}/api/v1/posts/create`, {
         method: "POST",
         body: formData,
       });

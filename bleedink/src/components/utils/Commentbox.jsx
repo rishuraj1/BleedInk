@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Commentdesign from "./Commentdesign";
 import { MdAdminPanelSettings } from "react-icons/md";
+import conf from "../../conf";
 
 const Commentbox = ({ post, setPost }) => {
   const [myCmt, setMyCmt] = useState("");
@@ -41,14 +42,14 @@ const Commentbox = ({ post, setPost }) => {
         comment: myCmt,
       };
       const response = await axios.post(
-        `/api/v1/posts/comment/${thisPost?._id}`,
+        `${conf.backendURL}/api/v1/posts/comment/${thisPost?._id}`,
         newComment,
       );
       toast.success("Comment posted");
 
       // update post
       const updatedpost = await axios.get(
-        `/api/v1/posts/getpost/${thisPost?._id}`,
+        `${conf.backendURL}/api/v1/posts/getpost/${thisPost?._id}`,
       );
       const data = (await updatedpost?.data?.post) || {};
       const commentData = (await updatedpost?.data?.comments) || [];

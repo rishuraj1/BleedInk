@@ -6,6 +6,7 @@ import { BiSolidEditAlt, BiImageAdd } from "react-icons/bi";
 import { update as updatState } from "../../store/authSlice";
 import Button from "../basics/Button";
 import { toast } from "react-toastify";
+import conf from "../../conf";
 
 const Profileheader = ({ user }) => {
   const { userData } = useSelector((state) => state?.auth);
@@ -42,7 +43,7 @@ const Profileheader = ({ user }) => {
         formCoverData.append("username", username);
         formCoverData.append("coverPicture", cover);
         const response = await fetch(
-          "/api/v1/dashboard/updateimages/coverimage",
+          `${conf.backendURL}/api/v1/dashboard/updateimages/coverimage`,
           {
             method: "POST",
             body: formCoverData,
@@ -57,7 +58,7 @@ const Profileheader = ({ user }) => {
         formProfileData.append("profilePicture", profile);
 
         const res = await fetch(
-          "/api/v1/dashboard/updateimages/profilepicture",
+          `${conf.backendURL}/api/v1/dashboard/updateimages/profilepicture`,
           {
             method: "POST",
             body: formProfileData,
@@ -83,7 +84,7 @@ const Profileheader = ({ user }) => {
         formCoverData.append("username", username);
         formCoverData.append("coverPicture", cover);
         const response = await fetch(
-          "/api/v1/dashboard/updateimages/coverimage",
+          `${conf.backendURL}/api/v1/dashboard/updateimages/coverimage`,
           {
             method: "POST",
             body: formCoverData,
@@ -108,7 +109,7 @@ const Profileheader = ({ user }) => {
         formProfileData.append("profilePicture", profile);
 
         const res = await fetch(
-          "/api/v1/dashboard/updateimages/profilepicture",
+          `${conf.backendURL}/api/v1/dashboard/updateimages/profilepicture`,
           {
             method: "POST",
             body: formProfileData,

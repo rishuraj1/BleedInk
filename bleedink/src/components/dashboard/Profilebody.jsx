@@ -7,6 +7,7 @@ import { Button, Input, Postcard } from "../../components";
 import { toast } from "react-toastify";
 import { AiFillEdit } from "react-icons/ai";
 import axios from "axios";
+import conf from "../../conf";
 
 const Profilebody = ({ user }) => {
   const { username } = useParams();
@@ -25,7 +26,7 @@ const Profilebody = ({ user }) => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `/api/v1/posts/getposts/${currUser?.id}`,
+          `${conf.backendURL}/api/v1/posts/getposts/${currUser?.id}`,
         );
         const data = response?.data?.posts;
         data.sort((a, b) => {
@@ -50,7 +51,10 @@ const Profilebody = ({ user }) => {
           name: name,
           bio: bio,
         };
-        await axios.post("/api/v1/dashboard/updateuser", formdata);
+        await axios.post(
+          `${conf.backendURL}/api/v1/dashboard/updateuser`,
+          formdata,
+        );
         // console.log(response);
 
         dispatch(
@@ -68,7 +72,10 @@ const Profilebody = ({ user }) => {
           username: currUser?.username,
           name: name,
         };
-        await axios.post("/api/v1/dashboard/updateuser", formdata);
+        await axios.post(
+          `${conf.backendURL}/api/v1/dashboard/updateuser`,
+          formdata,
+        );
         // console.log(response);
 
         dispatch(
@@ -85,7 +92,10 @@ const Profilebody = ({ user }) => {
           username: currUser?.username,
           bio: bio,
         };
-        await axios.post("/api/v1/dashboard/updateuser", formdata);
+        await axios.post(
+          `${conf.backendURL}/api/v1/dashboard/updateuser`,
+          formdata,
+        );
         // console.log(response);
 
         dispatch(
