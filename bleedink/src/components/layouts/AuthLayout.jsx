@@ -15,7 +15,7 @@ const AuthLayout = ({ children, authentication = true }) => {
     else if (!authentication && authStatus !== authentication) navigate("/");
     setTimeout(() => {
       setLoader(false);
-    });
+    }, 2000);
   }, [authStatus, authentication, navigate]);
 
   return loader ? (
