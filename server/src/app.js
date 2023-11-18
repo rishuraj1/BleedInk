@@ -22,15 +22,13 @@ app.use(express.urlencoded({ extended: true, limit: `${LIMIT}` }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-app.use(express.static(path.resolve(__dirname, "bleedink", "dist")));
-
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/posts", postRoute);
 app.use("/api/v1/dashboard", dashboardRoute);
 app.use("/api/v1/gpt", gptRoute);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "bleedink", "dist", "index.html"));
+app.get("/", (req, res) => {
+  res.send("Hello World");
 });
 
 export default app;
