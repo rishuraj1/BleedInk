@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout as authLogout } from "../../store/authSlice";
 import Button from "../basics/Button";
 import { Link } from "react-router-dom";
+import { IoLogoGithub } from "react-icons/io";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -42,6 +43,13 @@ const Header = () => {
               Log Out
             </Button>
           )}
+          <Link
+            to="https://github.com/rishuraj1/BleedInk"
+            target="_blank"
+            title="Github"
+          >
+            <IoLogoGithub className="inline-block text-3xl text-slate-700 hover:text-black hover:scale-110 ease-in-out duration-150 transition-all dark:text-slate-400 dark:hover:text-white" />
+          </Link>
         </div>
 
         {/* mobile */}
@@ -77,6 +85,13 @@ const Header = () => {
               Log Out
             </Button>
           )}
+          <Link
+            to="https://github.com/rishuraj1"
+            target="_blank"
+            title="Github"
+          >
+            <IoLogoGithub className="inline-block text-3xl text-slate-700 hover:text-black hover:scale-110 ease-in-out duration-150 transition-all dark:text-slate-400 dark:hover:text-white" />
+          </Link>
         </div>
       )}
     </nav>

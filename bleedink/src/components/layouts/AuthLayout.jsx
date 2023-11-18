@@ -18,7 +18,13 @@ const AuthLayout = ({ children, authentication = true }) => {
     }, 2000);
   }, [authStatus, authentication, navigate]);
 
-  return loader ? <Loader /> : <>{children}</>;
+  return loader ? (
+    <div className="justify-center items-center flex">
+      <Loader />
+    </div>
+  ) : (
+    <>{children}</>
+  );
 };
 
 export default AuthLayout;
