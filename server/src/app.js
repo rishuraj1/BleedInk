@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { LIMIT } from "./constants.js";
+import path from "path";
 
 import authRoute from "./routes/authRoute.js";
 import postRoute from "./routes/postRoute.js";
