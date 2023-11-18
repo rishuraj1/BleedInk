@@ -1,14 +1,14 @@
 import React from "react";
-import { loaderAnimation } from "../../assets";
+import { loaded } from "../../assets";
 import Lottie from "lottie-react";
 
 const Loader = () => {
   return (
     <Lottie
-      animationData={loaderAnimation}
+      animationData={loaded}
       loop={true}
       alt="Loading"
-      style={{ height: "100vh", width: "100vw" }}
+      className="w-96 h-96 justify-center items-center flex"
     />
   );
 };

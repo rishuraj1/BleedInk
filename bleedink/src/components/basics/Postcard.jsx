@@ -104,7 +104,7 @@ const Postcard = ({ post }) => {
   };
 
   return (
-    <div className="mt-4 flex flex-col gap-2 w-[450px] h-[310px] rounded-md shadow-md group hover:scale-105 duration-150 ease-in-out dark:bg-slate-900">
+    <div className="mt-4 flex flex-col gap-2 w-[390px] h-[300px] rounded-md shadow-md group hover:scale-105 duration-150 ease-in-out dark:bg-slate-900">
       <div className="flex border-2 border-white rounded-md flex-col relative bg-white">
         {userData?.username === createdBy?.username && (
           <>
@@ -113,9 +113,9 @@ const Postcard = ({ post }) => {
                 <Button className="w-15 text-sm" onClick={publishPrivatePost}>
                   Unpublish
                 </Button>
-                <Link to={`/edit-post/${post?._id}`}>
+                {/* <Link to={`/edit-post/${post?._id}`}>
                   <Button className="w-15 text-sm">Edit</Button>
-                </Link>
+                </Link> */}
                 <Button
                   onClick={handleDelete}
                   className="w-15 text-sm flex items-center text-center gap-2 bg-red-500 hover:bg-red-700 duration-150 ease-in-out"
@@ -190,11 +190,11 @@ const Postcard = ({ post }) => {
           </div>
         ) : (
           <div className="pt-4 mr-2 text-center gap-2 items-center flex">
-            <Link to={`/edit-post/${post?._id}`}>
+            {/* <Link to={`/edit-post/${post?._id}`}>
               <Button className="w-16">
                 <p className="text-xs text-center">Edit</p>
               </Button>
-            </Link>
+            </Link> */}
             <Button className="w-16" onClick={publishPrivatePost}>
               <p className="text-xs text-center">Publish</p>
             </Button>
@@ -204,7 +204,7 @@ const Postcard = ({ post }) => {
           </div>
         )}
       </div>
-      <div className="px-2 pb-2">
+      <div className="px-2">
         <p className="text-xs text-gray-600 flex items-center gap-1 text-center">
           <BiTime className="text-xs dark:text-slate-300" />
           <span className="dark:text-slate-300">
