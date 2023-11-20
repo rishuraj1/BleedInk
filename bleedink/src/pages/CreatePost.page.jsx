@@ -49,8 +49,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="flex gap-5 justify-between h-full items-start p-4">
-      <div className="h-full bg-slate-300 dark:bg-slate-900 p-2 rounded-sm w-[65%]">
+    <div className="flex max-md:flex-col gap-5 justify-between h-full items-start p-4">
+      <div className="h-full bg-slate-300 dark:bg-slate-900 p-2 rounded-sm w-[65%]  max-md:w-full">
         <form onSubmit={handleSubmit(submit)} className="gap-4 flex flex-col">
           <Input
             label="Title"
@@ -106,7 +106,9 @@ const CreatePost = () => {
           </Button>
         </form>
       </div>
-      <Assistant />
+      <div className="h-full w-[35%] max-md:w-full">
+        <Assistant />
+      </div>
     </div>
   );
 };

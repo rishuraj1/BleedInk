@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
-import { Postcard } from "../components";
+import { PostcardSkeleton } from "../components";
 import { loaded } from "../assets";
 import { toast } from "react-toastify";
 import { notfound } from "../assets";
 import Lottie from "lottie-react";
 import axios from "axios";
 import conf from "../conf";
+const Postcard = lazy(() => import("../components/basics/Postcard"));
 
 const HomePage = () => {
   const userData = useSelector((state) => state?.auth?.userData?.userData);
@@ -62,7 +63,11 @@ const HomePage = () => {
             {loading ? (
               <Lottie animationData={loaded} className="w-80 h-80" />
             ) : (
-              posts.map((post, index) => <Postcard key={index} post={post} />)
+              posts.map((post, index) => (
+                <Suspense fallback={<PostcardSkeleton />} key={index}>
+                  <Postcard key={index} post={post} />
+                </Suspense>
+              ))
             )}
           </>
         ) : (

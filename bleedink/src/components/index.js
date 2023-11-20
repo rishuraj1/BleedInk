@@ -23,3 +23,8 @@ export { default as Commentdesign } from "./utils/Commentdesign.jsx";
 export { default as Profile } from "./dashboard/Profile.jsx";
 export { default as Profileheader } from "./dashboard/Profileheader.jsx";
 export { default as Profilebody } from "./dashboard/Profilebody.jsx";
+
+// skeletons
+export { default as PostcardSkeleton } from "./skeletons/PostcardSkeleton.jsx";
+export { default as ProfileheaderSkeleton } from "./skeletons/ProfileheaderSkeleton.jsx";
+export { default as PostboxSkeleton } from "./skeletons/PostboxSkeleton.jsx";
