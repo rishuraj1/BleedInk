@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import { update as editUser } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Input, Postcard } from "../../components";
+import { Button, Input, PostcardSkeleton } from "../../components";
 import { toast } from "react-toastify";
 import { AiFillEdit } from "react-icons/ai";
 import axios from "axios";
 import conf from "../../conf";
+const Postcard = lazy(() => import("../../components/basics/Postcard"));
 
 const Profilebody = ({ user }) => {
   const { username } = useParams();
@@ -212,7 +213,11 @@ const Profilebody = ({ user }) => {
         <h1 className="text-xl dark:text-slate-300">Posts</h1>
         <div className="flex gap-6 flex-wrap">
           {posts &&
-            posts.map((post, index) => <Postcard key={index} post={post} />)}
+            posts.map((post, index) => (
+              <Suspense fallback={<PostcardSkeleton />} key={index}>
+                <Postcard key={index} post={post} />
+              </Suspense>
+            ))}
         </div>
       </div>
     </div>

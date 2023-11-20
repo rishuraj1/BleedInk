@@ -63,6 +63,10 @@ const userSchema = new mongoose.Schema(
         required: false,
       },
     ],
+    threads: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true },
 );

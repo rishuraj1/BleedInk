@@ -6,3 +6,5 @@ export { default as postBackground } from "./postBackground.jpg";
 export { default as nocomments } from "./nocomments.json";
 export { default as notfound } from "./notfound.json";
 export { default as loaded } from "./loaded.json";
+export { default as blogster } from "./blogster.json";
+export { default as loadingChat } from "./loadingChat.json";
