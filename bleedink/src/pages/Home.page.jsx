@@ -12,15 +12,18 @@ const Postcard = lazy(() => import("../components/basics/Postcard"));
 const HomePage = () => {
   const userData = useSelector((state) => state?.auth?.userData?.userData);
   // console.log(userData);
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState(null);
   const getPublicPosts = async () => {
     try {
       const response = await axios.get(
         `${conf.backendURL}/api/v1/posts/getposts`,
       );
-      // console.log(response);
+      console.log(response);
       const data = response?.data?.posts;
+      if (data.length === 0) {
+        setPosts(null);
+        return;
+      }
       // set posts by createdAt
       data.sort((a, b) => {
         return new Date(b.createdAt) - new Date(a.createdAt);
@@ -33,11 +36,10 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
     getPublicPosts();
   }, [userData]);
+
+  console.log(posts);
 
   const userName = userData
     ? userData?.name?.split(" ")[0] || userData?.name
@@ -58,7 +60,7 @@ const HomePage = () => {
       </div>
       {/* posts */}
       <div className="flex gap-4 flex-wrap">
-        {posts ? (
+        {/* {posts && (
           <>
             {loading ? (
               <Lottie animationData={loaded} className="w-80 h-80" />
@@ -70,6 +72,24 @@ const HomePage = () => {
               ))
             )}
           </>
+        )}
+        {posts === null && (
+          <div className="flex flex-col justify-center items-center">
+            <h1 className="text-2xl font-semibold dark:text-slate-100">
+              No posts to show
+            </h1>
+            <div className="flex flex-col justify-center items-center">
+              <Lottie animationData={notfound} className="w-80 h-80" />
+            </div>
+          </div>
+        )} */}
+
+        {posts ? (
+          posts.map((post, index) => (
+            <Suspense fallback={<PostcardSkeleton />} key={index}>
+              <Postcard key={index} post={post} />
+            </Suspense>
+          ))
         ) : (
           <div className="flex flex-col justify-center items-center">
             <h1 className="text-2xl font-semibold dark:text-slate-100">

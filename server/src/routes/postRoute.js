@@ -144,6 +144,17 @@ router.route("/comment/:postId").post(async (req, res) => {
   }
 });
 
+//delete comment by id
+router.route("/comment/:commentId").delete(async (req, res) => {
+  try {
+    const response = await Comment.findByIdAndDelete(req.params.commentId);
+    // console.log(response);
+    res.status(200).json({ success: true, message: "Comment deleted" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 //delete post by id
 router.route("/delete/:postId").delete(async (req, res) => {
   try {

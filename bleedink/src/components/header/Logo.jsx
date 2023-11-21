@@ -7,6 +7,7 @@ const Logo = ({ width = "100px" }) => {
       src={logo}
       alt={"BleedINK"}
       width="53px"
+      loading="lazy"
       className="rounded-full p-[3px] bg-indigo-500"
     />
   );

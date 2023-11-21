@@ -78,6 +78,7 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
           <div className="flex flex-col items-start justify-center relative">
             <img
               src={thumbnail}
+              loading="lazy"
               alt="thumbnail"
               className="object-cover w-full max-h-[350px] border-2 border-black rounded-sm"
             />
@@ -87,6 +88,7 @@ const Postbox = ({ post, setIsCommentBox, isCommentBox, setPost }) => {
                   src={createdBy?.profilePicture || userAvatar}
                   alt="user"
                   title={createdBy?.fullname}
+                  loading="lazy"
                   className="w-36 h-36 border-2 border-white rounded-full object-cover"
                 />
               </Link>

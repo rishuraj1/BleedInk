@@ -84,6 +84,7 @@ const CreatePost = () => {
               <img
                 src={URL.createObjectURL(imagePreview)}
                 alt="Selected thumbnail"
+                loading="lazy"
                 className="w-1/3 h-full object-cover cursor-pointer ease-in-out rounded-sm border-indigo-500 hover:border-indigo-700 border-2"
                 title="Click to view full size"
                 onClick={() => {

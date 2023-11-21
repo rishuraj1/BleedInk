@@ -28,7 +28,7 @@ const Assistant = () => {
         userId: userData?.id,
         name: userData?.name,
       });
-      const data = res.data?.data;
+      const data = res.data?.data?.choices[0]?.text;
       console.log(data);
       setResponse(data);
     } catch (err) {

@@ -71,13 +71,14 @@ const Commentbox = ({ post, setPost }) => {
 
   return (
     <div
-      className={`flex flex-col w-[40%] bg-gray-400 dark:bg-gray-900 justify-start items-center p-2 rounded-md gap-4 max-md:w-full max-md:mt-4 max-md:rounded-none max-md:rounded-t-md max-md:rounded-b-md max-md:shadow-md max-md:bg-white dark:max-md:bg-white
+      className={`flex flex-col w-[40%] bg-gray-300 dark:bg-gray-900 justify-start items-center p-2 rounded-md gap-4 max-md:w-full max-md:mt-4 max-md:rounded-none max-md:rounded-t-md max-md:rounded-b-md max-md:shadow-md max-md:bg-white dark:max-md:bg-white
        max-md:justify-center max-md:items-center max-md:p-4 max-md:gap-4`}
     >
       {userData ? (
         <div className="flex flex-col gap-4 w-full flex-wrap no-scrollbar overflow-y-scroll">
           <div className="flex gap-2 mt-4 w-full items-start">
             <img
+              loading="lazy"
               src={userData?.profilePicture || userAvatar}
               className={`w-12 h-12 rounded-full object-cover border-2 ${
                 isAuthor ? "border-green-500" : "border-white"
