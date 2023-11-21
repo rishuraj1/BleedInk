@@ -17,6 +17,7 @@ const Avatar = () => {
       <img
         src={userData?.profilePicture || userAvatar}
         alt="user avatar"
+        loading="lazy"
         title={userData?.name}
         className={`rounded-full w-[40px] h-[40px] cursor-pointer object-cover`}
       />

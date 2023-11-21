@@ -154,6 +154,7 @@ const Profileheader = ({ user }) => {
             <img
               src={coverPreview}
               alt="cover"
+              loading="lazy"
               className="w-full h-full object-cover rounded-sm rounded-b-none group-hover/cover:opacity-50 ease-in-out duration-150"
             />
             {username === author?.username && (
@@ -183,6 +184,7 @@ const Profileheader = ({ user }) => {
               src={profilePreview}
               alt="user"
               title={user?.name}
+              loading="lazy"
               className="bg-white border-4 border-white rounded-full w-28 h-28 object-cover group-hover/pp:opacity-50 ease-in-out duration-150"
             />
             {username === author?.username && (

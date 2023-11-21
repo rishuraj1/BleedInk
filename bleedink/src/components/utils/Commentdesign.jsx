@@ -21,6 +21,7 @@ const Commentdesign = ({ comment, authorId }) => {
       <img
         src={thisComment?.commentedBy?.profilePicture || userAvatar}
         alt="user"
+        loading="lazy"
         className={`w-12 h-12 rounded-full relative object-cover border-2 ${
           isCommentAuthor ? "border-green-500" : "border-white"
         }`}

@@ -132,6 +132,7 @@ const Postcard = ({ post }) => {
           <img
             src={thumbnail}
             alt="thumbnail"
+            loading="lazy"
             className="object-cover rounded-md"
           />
         </div>
@@ -142,6 +143,7 @@ const Postcard = ({ post }) => {
               title={createdBy?.fullname}
               src={createdBy?.profilePicture || userAvatar}
               alt=""
+              loading="lazy"
               className="rounded-full object-cover w-14 h-14 border-2 border-white absolute -bottom-[26px] left-3 cursor-pointer"
             />
           </Link>
