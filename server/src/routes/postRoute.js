@@ -145,7 +145,7 @@ router.route("/comment/:postId").post(async (req, res) => {
 });
 
 //delete comment by id
-router.route("/comment/:commentId").delete(async (req, res) => {
+router.route("/deletecomment/:commentId").delete(async (req, res) => {
   try {
     const response = await Comment.findByIdAndDelete(req.params.commentId);
     // console.log(response);
@@ -168,7 +168,7 @@ router.route("/delete/:postId").delete(async (req, res) => {
 
 //add or remove a like
 router.route("/like/:userId/:postId").post(async (req, res) => {
-  // console.log(req.params, req.body);
+  console.log(req.params, req.body);
   try {
     const response = await Post.findById(req.params.postId);
     console.log(response);
